@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumen | Your Mind, Augmented</title>
+    
+    <!-- FAVICON ADDED HERE -->
+    <link rel="icon" href="logo.png" type="image/png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Anime.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0A0E1A',
+                            surface: '#12182B',
+                            cyan: '#00D4FF',
+                            indigo: '#4F46E5',
+                            text: '#E2E8F0',
+                            muted: '#94A3B8'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Utilities */
+        body {
+            background-color: #0A0E1A;
+            color: #E2E8F0;
+            overflow-x: hidden;
+        }
+
+        .glass-panel {
+            background: rgba(18, 24, 43, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Perspective Utility - Fixed */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        
+        /* Modal Styles */
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 14, 26, 0.9);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal-backdrop.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .modal-backdrop.active .modal-content {
+            transform: scale(1);
+        }
+
+        /* 3D Phone Mockup CSS */
+        .iphone-mockup {
+            width: 300px;
+            height: 600px;
+            background: #000;
+            border-radius: 40px;
+            border: 8px solid #2d2d2d;
+            position: relative;
+            box-shadow: 
+                0 0 0 2px #4a4a4a,
+                0 20px 50px -10px rgba(0, 0, 0, 0.5),
+                0 0 100px rgba(0, 212, 255, 0.2);
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transform: rotateX(15deg) rotateY(-10deg) rotateZ(5deg);
+            transition: transform 0.5s ease-out;
+        }
+
+        .iphone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 25px;
+            background: #000;
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
+            z-index: 20;
+        }
+
+        .iphone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #1a1f35 0%, #0A0E1A 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Phone Screen Transitions */
+        .screen-view {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding-top: 50px; /* Space for notch */
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(20px);
+        }
+        
+        .screen-view.active {
+            opacity: 1;
+            pointer-events: all;
+            transform: translateX(0);
+        }
+
+        /* Neural Node Styles */
+        .node {
+            position: absolute;
+            background: #00D4FF;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00D4FF;
+        }
+        
+        .connection {
+            position: absolute;
+            background: rgba(0, 212, 255, 0.3);
+            transform-origin: 0 50%;
+        }
+
+        /* Scroll Animation Classes */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        /* Chat Animations */
+        @keyframes typing {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        .typing-dot {
+            animation: typing 1s infinite;
+        }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        /* Toast Notification */
+        #toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #00D4FF;
+            color: #0A0E1A;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 1000;
+            box-shadow: 0 10px 30px -5px rgba(0, 212, 255, 0.4);
+        }
+        #toast.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Toast Notification -->
+    <div id="toast">Item Saved to Vault</div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300 backdrop-blur-md bg-brand-dark/50 border-b border-white/5" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                <img src="logo.png" alt="Lumen Logo" class="w-10 h-10 rounded-lg border border-white/10">
+                <span class="font-display font-bold text-xl tracking-tight text-white">Lumen</span>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-brand-muted">
+                <a href="#features" class="hover:text-brand-cyan transition-colors">Features</a>
+                <a href="#how-it-works" class="hover:text-brand-cyan transition-colors">Method</a>
+                <a href="#pricing" class="hover:text-brand-cyan transition-colors">Pricing</a>
+                <!-- New: Vault Link -->
+                <button onclick="openModal('vault')" class="flex items-center gap-2 text-brand-cyan hover:text-white transition-colors">
+                    <i data-lucide="archive" class="w-4 h-4"></i> My Vault
+                </button>
+            </div>
+            <button onclick="openModal('signup')" class="px-5 py-2.5 rounded-full bg-white/5 border border-white/10 hover:bg-brand-cyan hover:text-brand-dark hover:border-transparent transition-all duration-300 text-sm font-medium">
+                Get Early Access
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden" id="hero-section">
+    <canvas id="neural-canvas" class="absolute inset-0 opacity-40 pointer-events-none"></canvas>
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-brand-cyan/20 rounded-full blur-3xl -z-10"></div>
+    <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-brand-indigo/20 rounded-full blur-3xl -z-10"></div>
+
+    <div class="container mx-auto px-24 grid lg:grid-cols-2 gap-12 items-center relative z-10">
+      <div class="max-w-2xl">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-cyan/10 border border-brand-cyan/20 text-brand-cyan text-xs font-bold uppercase mb-6">
+          <span class="w-2 h-2 rounded-full bg-brand-cyan animate-pulse"></span>
+          AI Knowledge Vault v2.0
+        </div>
+        <h1 class="text-5xl md:text-7xl font-display font-bold leading-tight mb-6 stagger-text">
+          Your mind,<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan to-brand-indigo">augmented.</span>
+        </h1>
+        <p class="text-lg text-brand-muted mb-8 max-w-lg stagger-text">
+          Stop drowning in notes. Lumen uses AI to connect your thoughts, surface hidden patterns, and turn information into insight.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 stagger-text">
+          <button onclick="openModal('signup')" class="px-8 py-4 bg-brand-cyan text-brand-dark font-bold rounded-full hover:shadow-[0_0_30px_-5px_rgba(0,212,255,0.5)] transition transform hover:-translate-y-1 flex items-center justify-center gap-2 group">
+            Start Free <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-2 transition"></i>
+          </button>
+          <button onclick="openModal('video')" class="px-8 py-4 bg-white/5 border border-white/10 rounded-full hover:bg-white/10 transition flex items-center justify-center gap-3">
+            <i data-lucide="play-circle" class="w-6 h-6 text-brand-cyan"></i> Watch Demo
+          </button>
+        </div>
+        <div class="mt-12 flex items-center gap-6 text-sm text-brand-muted stagger-text">
+                    <div class="flex -space-x-3">
+                        <img src="https://i.pravatar.cc/100?img=1" alt="User" class="w-10 h-10 rounded-full border-2 border-brand-dark">
+                        <img src="https://i.pravatar.cc/100?img=2" alt="User" class="w-10 h-10 rounded-full border-2 border-brand-dark">
+                        <img src="https://i.pravatar.cc/100?img=3" alt="User" class="w-10 h-10 rounded-full border-2 border-brand-dark">
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-1 text-yellow-400">
+                            <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                            <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                            <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                            <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                            <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                        </div>
+                        <span class="font-medium text-white">4.9/5</span> from 40k+ thinkers
+                    </div>
+                </div>
+      </div>
+
+      <!-- iPhone Mockup -->
+      <div class="flex justify-center lg:justify-end perspective-1000">
+        <div class="iphone-mockup" id="hero-phone">
+          <div class="iphone-notch"></div>
+          <div class="iphone-screen">
+            <div id="phone-view-home" class="screen-view active p-6 flex flex-col h-full">
+              <div class="flex justify-between items-center mb-6">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+                <div class="text-brand-cyan font-bold">Lumen</div>
+                <i data-lucide="search" class="w-6 h-6"></i>
+              </div>
+              <div class="space-y-4 flex-1">
+                <div onclick="switchPhoneView('detail-1')" class="bg-white/10 p-4 rounded-xl border border-white/5 backdrop-blur cursor-pointer hover:bg-white/20 transition">
+                  <div class="flex items-start gap-3">
+                    <div class="p-2 bg-brand-cyan/20 rounded-lg"><i data-lucide="brain-circuit" class="w-5 h-5 text-brand-cyan"></i></div>
+                    <div><h4 class="font-bold text-sm">Neural Arch</h4><p class="text-xs text-brand-muted">Connection: Design Systems → Biology</p></div>
+                  </div>
+                </div>
+                <div onclick="switchPhoneView('detail-2')" class="bg-white/10 p-4 rounded-xl border border-white/5 backdrop-blur cursor-pointer hover:bg-white/20 transition">
+                  <div class="flex items-start gap-3">
+                    <div class="p-2 bg-purple-500/20 rounded-lg"><i data-lucide="sparkles" class="w-5 h-5 text-purple-400"></i></div>
+                    <div><h4 class="font-bold text-sm">Idea Synthesis</h4><p class="text-xs text-brand-muted">3 drafts from notes</p></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="phone-view-detail-1" class="screen-view p-6">
+              <button onclick="switchPhoneView('home')" class="flex items-center gap-2 text-brand-muted text-sm mb-6"><i data-lucide="arrow-left"></i> Back</button>
+              <div class="p-3 bg-brand-cyan/20 rounded-full w-12 h-12 flex items-center justify-center mb-4"><i data-lucide="brain-circuit" class="w-6 h-6 text-brand-cyan"></i></div>
+              <h3 class="text-xl font-bold mb-2">Neural Arch</h3>
+              <p class="text-sm text-brand-muted mb-4">Lumen found a link between "Atomic Design" and "Cellular Mitosis"</p>
+              <div class="p-4 bg-white/5 rounded-lg border border-white/10 text-xs">
+                <div class="text-brand-cyan font-bold mb-1">Insight</div>
+                <p>"Components are living organisms that evolve"</p>
+              </div>
+            </div>
+
+            <div id="phone-view-detail-2" class="screen-view p-6">
+              <button onclick="switchPhoneView('home')" class="flex items-center gap-2 text-brand-muted text-sm mb-6"><i data-lucide="arrow-left"></i> Back</button>
+              <div class="p-3 bg-purple-500/20 rounded-full w-12 h-12 flex items-center justify-center mb-4"><i data-lucide="sparkles" class="w-6 h-6 text-purple-400"></i></div>
+              <h3 class="text-xl font-bold mb-4">Idea Synthesis</h3>
+              <div class="space-y-3 text-sm">
+                <div class="p-3 bg-white/5 rounded-lg border border-white/10 flex justify-between"><span>Blog: Stoic PM</span><i data-lucide="download"></i></div>
+                <div class="p-3 bg-white/5 rounded-lg border border-white/10 flex justify-between"><span>Tweet Thread</span><i data-lucide="download"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-32 relative">
+        <div class="max-w-7xl mx-auto px-6 space-y-32">
+            
+            <!-- Feature 1: Capture (Functional) -->
+            <div class="grid md:grid-cols-2 gap-16 items-center reveal-on-scroll">
+                <div class="order-2 md:order-1 relative group">
+                    <div class="absolute inset-0 bg-brand-cyan/20 blur-[60px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                    <div class="relative glass-panel rounded-3xl p-8 border border-white/10 aspect-square flex flex-col justify-center items-center overflow-hidden">
+                        <div class="w-64 h-full bg-brand-surface rounded-2xl border border-white/5 shadow-2xl flex flex-col items-center pt-8 relative overflow-hidden transition-all" id="capture-device">
+                            
+                            <!-- Recording State UI -->
+                            <button id="record-btn" onclick="toggleRecording()" class="w-16 h-16 rounded-full bg-brand-cyan/20 flex items-center justify-center text-brand-cyan mb-4 hover:bg-brand-cyan hover:text-brand-dark transition-all cursor-pointer z-10">
+                                <i data-lucide="mic" class="w-8 h-8"></i>
+                            </button>
+                            
+                            <div id="recording-status" class="text-xs text-brand-cyan font-bold uppercase tracking-widest mb-2 opacity-0 transition-opacity">Recording...</div>
+                            
+                            <!-- Dynamic Text Output -->
+                            <div id="transcription-output" class="w-56 px-4 text-center text-sm text-brand-muted h-32 overflow-hidden transition-all opacity-50">
+                                Tap mic to capture thought...
+                            </div>
+
+                            <!-- Audio Wave Animation (CSS) -->
+                            <div class="flex items-end gap-1 h-12 mt-auto mb-8 opacity-30 transition-opacity" id="audio-wave">
+                                <div class="w-1 bg-brand-cyan h-4 animate-[bounce_1s_infinite]"></div>
+                                <div class="w-1 bg-brand-cyan h-8 animate-[bounce_1.2s_infinite]"></div>
+                                <div class="w-1 bg-brand-cyan h-6 animate-[bounce_0.8s_infinite]"></div>
+                                <div class="w-1 bg-brand-cyan h-10 animate-[bounce_1.5s_infinite]"></div>
+                                <div class="w-1 bg-brand-cyan h-5 animate-[bounce_0.9s_infinite]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2">
+                    <div class="w-12 h-12 rounded-xl bg-brand-cyan/10 flex items-center justify-center text-brand-cyan mb-6">
+                        <i data-lucide="zap" class="w-6 h-6"></i>
+                    </div>
+                    <h2 class="text-4xl font-display font-bold mb-4">Capture in one tap.</h2>
+                    <p class="text-brand-muted text-lg leading-relaxed mb-6">
+                        Instantly save thoughts, photos, and voice notes. Lumen automatically transcribes, tags, and summarizes everything with context awareness.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 text-sm text-brand-text">
+                            <i data-lucide="check" class="w-4 h-4 text-brand-cyan"></i> Instant Voice-to-Text
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-brand-text">
+                            <i data-lucide="check" class="w-4 h-4 text-brand-cyan"></i> OCR for Images & Books
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-brand-text">
+                            <i data-lucide="check" class="w-4 h-4 text-brand-cyan"></i> Web Clipper Extension
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Feature 2: Connect (Swapped) -->
+            <div class="grid md:grid-cols-2 gap-16 items-center reveal-on-scroll">
+                <div>
+                    <div class="w-12 h-12 rounded-xl bg-brand-indigo/20 flex items-center justify-center text-brand-indigo mb-6">
+                        <i data-lucide="network" class="w-6 h-6"></i>
+                    </div>
+                    <h2 class="text-4xl font-display font-bold mb-4">Connect ideas automatically.</h2>
+                    <p class="text-brand-muted text-lg leading-relaxed mb-6">
+                        Stop organizing manually. Lumen's vector embedding engine finds hidden patterns and links related concepts across your vault instantly.
+                    </p>
+                    <a href="#" onclick="openModal('signup')" class="text-brand-cyan font-semibold flex items-center gap-2 hover:gap-4 transition-all">
+                        See how it works <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-brand-indigo/20 blur-[60px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                    <div class="relative glass-panel rounded-3xl p-8 border border-white/10 aspect-square flex items-center justify-center">
+                        <!-- Anime.js Target for Connection Animation -->
+                        <div id="connection-demo" class="relative w-64 h-64">
+                            <div class="absolute top-0 left-0 p-3 bg-brand-surface border border-brand-cyan/30 rounded-lg text-xs shadow-lg shadow-brand-cyan/20 z-10 transition-transform hover:scale-110 cursor-default">Biology</div>
+                            <div class="absolute bottom-0 right-0 p-3 bg-brand-surface border border-brand-indigo/30 rounded-lg text-xs shadow-lg shadow-brand-indigo/20 z-10 transition-transform hover:scale-110 cursor-default">Architecture</div>
+                            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-3 bg-brand-surface border border-white/10 rounded-lg text-xs z-10 transition-transform hover:scale-110 cursor-default">Biomimicry</div>
+                            <!-- SVG Lines will be drawn here by Anime.js -->
+                            <svg class="absolute inset-0 w-full h-full pointer-events-none overflow-visible">
+                                <path class="connection-line" d="M30 30 L 128 128" stroke="#00D4FF" stroke-width="2" fill="none" stroke-dasharray="200" stroke-dashoffset="200"/>
+                                <path class="connection-line" d="M220 220 L 128 128" stroke="#4F46E5" stroke-width="2" fill="none" stroke-dasharray="200" stroke-dashoffset="200"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Feature 3: Ask (Interactive) -->
+             <div class="grid md:grid-cols-2 gap-16 items-center reveal-on-scroll">
+                <div class="order-2 md:order-1 relative group">
+                    <div class="absolute inset-0 bg-brand-cyan/20 blur-[60px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                    <!-- Fixed Height -->
+                    <div class="relative glass-panel rounded-3xl p-8 border border-white/10 h-[500px] flex flex-col justify-between items-center">
+                        
+                        <!-- Chat Output -->
+                        <div id="chat-container" class="w-full flex-1 overflow-y-auto space-y-4 mb-4 pr-2">
+                            <!-- Pre-filled example -->
+                            <div class="flex justify-start">
+                                <div class="bg-white/10 text-brand-text px-4 py-3 rounded-2xl rounded-tl-sm text-sm border border-white/5 max-w-[85%]">
+                                    <div class="flex items-center gap-2 mb-2 text-brand-cyan text-xs uppercase tracking-wide">
+                                        <i data-lucide="sparkles" class="w-3 h-3"></i> Welcome
+                                    </div>
+                                    <p>I am connected to your vault. Capture some notes, then ask me anything!</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chat Input -->
+                        <form onsubmit="handleChatSubmit(event)" class="w-full relative">
+                            <input type="text" id="chat-input" placeholder="Ask your second brain..." class="w-full bg-black/40 border border-white/10 rounded-full px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-cyan transition-colors pr-12">
+                            <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 bg-brand-cyan rounded-full text-brand-dark hover:bg-white transition-colors">
+                                <i data-lucide="arrow-up" class="w-4 h-4"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center text-purple-400 mb-6">
+                        <i data-lucide="message-square-dashed" class="w-6 h-6"></i>
+                    </div>
+                    <h2 class="text-4xl font-display font-bold mb-4">Ask anything.</h2>
+                    <p class="text-brand-muted text-lg leading-relaxed mb-6">
+                        Your personal AI that knows everything you've ever saved. Query your entire knowledge base in natural language and get citation-backed answers.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-24 relative overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-full bg-brand-cyan/5 blur-[100px] rounded-full -z-10"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 text-center mb-16">
+            <h2 class="text-4xl font-display font-bold mb-4">Invest in your mind.</h2>
+            <p class="text-brand-muted">Simple pricing. No hidden fees. Cancel anytime.</p>
+        </div>
+
+        <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+            <!-- Free -->
+            <div class="glass-panel p-8 rounded-3xl border border-white/5 hover:border-white/20 transition-all reveal-on-scroll">
+                <h3 class="text-xl font-medium mb-2">Explorer</h3>
+                <div class="text-4xl font-bold mb-6">$0<span class="text-sm font-normal text-brand-muted">/mo</span></div>
+                <p class="text-brand-muted text-sm mb-8">Perfect for getting started with digital gardening.</p>
+                <button onclick="openModal('signup')" class="w-full py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all font-medium mb-8">Get Started</button>
+                <ul class="space-y-4 text-sm text-left">
+                    <li class="flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-muted"></i> 50 AI captures/mo</li>
+                    <li class="flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-muted"></i> Basic connections</li>
+                    <li class="flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-muted"></i> Mobile app access</li>
+                </ul>
+            </div>
+
+            <!-- Pro (Highlighted) -->
+            <div class="relative p-8 rounded-3xl bg-gradient-to-b from-brand-surface to-brand-dark border border-brand-cyan/50 shadow-[0_0_50px_-10px_rgba(0,212,255,0.15)] transform md:-translate-y-4 reveal-on-scroll">
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-cyan text-brand-dark px-4 py-1 rounded-full text-xs font-bold tracking-wide">MOST POPULAR</div>
+                <h3 class="text-xl font-medium mb-2 text-brand-cyan">Thinker</h3>
+                <div class="text-4xl font-bold mb-6">$12<span class="text-sm font-normal text-brand-muted">/mo</span></div>
+                <p class="text-brand-muted text-sm mb-8">For serious researchers and creators.</p>
+                <button onclick="openModal('signup')" class="w-full py-3 rounded-xl bg-brand-cyan text-brand-dark hover:bg-brand-cyan/90 transition-all font-bold mb-8 shadow-lg shadow-brand-cyan/20">Start 14-Day Free Trial</button>
+                <ul class="space-y-4 text-sm text-left">
+                    <li class="flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-cyan"></i> Unlimited AI captures</li>
+                    <li class="flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-cyan"></i> Deep pattern recognition</li>
+                    <li class="flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-cyan"></i> Web, Mobile & Desktop</li>
+                    <li class="flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-cyan"></i> API Access</li>
+                </ul>
+            </div>
+
+            <!-- Team -->
+            <div class="glass-panel p-8 rounded-3xl border border-white/5 hover:border-white/20 transition-all reveal-on-scroll">
+                <h3 class="text-xl font-medium mb-2">Collective</h3>
+                <div class="text-4xl font-bold mb-6">Custom</div>
+                <p class="text-brand-muted text-sm mb-8">Shared brains for high-performance teams.</p>
+                <button onclick="openModal('signup')" class="w-full py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all font-medium mb-8">Contact Sales</button>
+                <ul class="space-y-4 text-sm text-left">
+                    <li class="flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-muted"></i> Collaborative Spaces</li>
+                    <li class="flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-muted"></i> Admin controls</li>
+                    <li class="flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-muted"></i> SSO & Priority Support</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-32 text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-t from-brand-cyan/10 to-transparent pointer-events-none"></div>
+        <div class="max-w-4xl mx-auto px-6 relative z-10">
+            <h2 class="text-5xl md:text-8xl font-display font-bold mb-8 leading-none tracking-tight">
+                Stop forgetting.<br>
+                <span class="text-brand-cyan">Start thinking.</span>
+            </h2>
+            <p class="text-xl text-brand-muted mb-12">Join the waitlist for Android or download on iOS today.</p>
+            
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <button onclick="openModal('signup')" class="bg-white text-black px-8 py-4 rounded-xl font-bold flex items-center gap-3 hover:bg-gray-200 transition-colors">
+                    <i data-lucide="apple" class="w-6 h-6"></i>
+                    <div class="text-left leading-none">
+                        <div class="text-[10px] uppercase">Download on the</div>
+                        <div class="text-lg">App Store</div>
+                    </div>
+                </button>
+                <button onclick="openModal('signup')" class="bg-transparent border border-white/20 text-white px-8 py-4 rounded-xl font-bold flex items-center gap-3 hover:bg-white/5 transition-colors">
+                    <i data-lucide="smartphone" class="w-6 h-6 text-brand-cyan"></i>
+                    <div class="text-left leading-none">
+                        <div class="text-[10px] uppercase">Join Waitlist</div>
+                        <div class="text-lg">Android</div>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 py-12 bg-black">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="flex items-center gap-2">
+                <img src="logo.png" alt="Lumen Logo" class="w-10 h-10 rounded-lg border border-white/10">
+            </div>
+            <div class="text-brand-muted text-sm">
+                &copy; 2024 Lumen Intelligence Inc. All rights reserved.
+            </div>
+            <div class="flex gap-6">
+                <a href="#" class="text-brand-muted hover:text-white transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                <a href="https://github.com/Dibyaranjan27" class="text-brand-muted hover:text-white transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
+                <a href="https://www.linkedin.com/in/dibyaranjan-maharana-1228012b2/" class="text-brand-muted hover:text-white transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Modals -->
+    <div id="modal-backdrop" class="modal-backdrop">
+        
+        <!-- Signup/Waitlist Modal -->
+        <div id="modal-signup" class="hidden modal-content bg-brand-surface border border-white/10 p-8 rounded-3xl max-w-md w-full mx-4 shadow-2xl relative">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-brand-muted hover:text-white">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-brand-cyan/20 rounded-xl flex items-center justify-center text-brand-cyan mx-auto mb-4">
+                    <i data-lucide="sparkles" class="w-6 h-6"></i>
+                </div>
+                <h3 class="text-2xl font-display font-bold mb-2">Join the Beta</h3>
+                <p class="text-brand-muted">Get early access to Lumen and start augmenting your mind today.</p>
+            </div>
+            <form class="space-y-4" onsubmit="event.preventDefault(); alert('Thanks for joining! We will be in touch.'); closeModal();">
+                <div>
+                    <label class="block text-sm font-medium text-brand-muted mb-1">Email Address</label>
+                    <input type="email" required placeholder="you@example.com" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-cyan transition-colors">
+                </div>
+                <button type="submit" class="w-full py-3 rounded-xl bg-brand-cyan text-brand-dark font-bold hover:bg-brand-cyan/90 transition-all">Join Waitlist</button>
+            </form>
+            <p class="text-xs text-brand-muted text-center mt-4">No spam. Unsubscribe anytime.</p>
+        </div>
+
+        <!-- Video Modal -->
+        <div id="modal-video" class="hidden modal-content bg-black border border-white/10 p-2 rounded-3xl max-w-4xl w-full mx-4 shadow-2xl relative aspect-video flex items-center justify-center">
+            <button onclick="closeModal()" class="absolute -top-10 right-0 text-white hover:text-brand-cyan">
+                <i data-lucide="x" class="w-8 h-8"></i>
+            </button>
+            <div class="text-center">
+                <div class="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center mb-4 mx-auto animate-pulse">
+                    <i data-lucide="play" class="w-8 h-8 text-white ml-1"></i>
+                </div>
+                <p class="text-brand-muted font-display">Demo Video Placeholder</p>
+            </div>
+        </div>
+
+        <!-- NEW: Vault Modal (Simulating App Interface) -->
+        <div id="modal-vault" class="hidden modal-content bg-brand-surface border border-white/10 p-0 rounded-3xl max-w-2xl w-full mx-4 shadow-2xl relative h-[600px] flex flex-col overflow-hidden">
+            <div class="p-6 border-b border-white/10 flex justify-between items-center bg-brand-dark/50">
+                <div class="flex items-center gap-3">
+                    <i data-lucide="archive" class="text-brand-cyan"></i>
+                    <h3 class="text-xl font-bold font-display">My Vault</h3>
+                </div>
+                <button onclick="closeModal()" class="text-brand-muted hover:text-white">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div class="flex-1 overflow-y-auto p-6 space-y-3" id="vault-list">
+                <!-- Items injected via JS -->
+                <div class="text-center text-brand-muted mt-20">Vault is empty. Use "Capture" to add notes.</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // --- STATE MANAGEMENT (SIMULATED BACKEND) ---
+        const AppState = {
+            notes: JSON.parse(localStorage.getItem('lumen_notes')) || [
+                { id: 1, text: "Marcus Aurelius: 'Amor Fati' means loving one's fate. It is central to Stoicism.", date: "2023-10-01" },
+                { id: 2, text: "Agile Project Management focuses on iterative progress and adapting to change.", date: "2023-10-02" },
+                { id: 3, text: "Deep Work by Cal Newport emphasizes distraction-free concentration.", date: "2023-10-03" }
+            ],
+            
+            addNote: function(text) {
+                const note = {
+                    id: Date.now(),
+                    text: text,
+                    date: new Date().toISOString().split('T')[0]
+                };
+                this.notes.unshift(note);
+                localStorage.setItem('lumen_notes', JSON.stringify(this.notes));
+                showToast("Note captured to Vault");
+                this.renderVault();
+            },
+
+            searchNotes: function(query) {
+                const lowerQ = query.toLowerCase();
+                return this.notes.filter(n => n.text.toLowerCase().includes(lowerQ));
+            },
+
+            renderVault: function() {
+                const list = document.getElementById('vault-list');
+                if(!list) return;
+
+                if (this.notes.length === 0) {
+                    list.innerHTML = `<div class="text-center text-brand-muted mt-20">Vault is empty. Use "Capture" to add notes.</div>`;
+                    return;
+                }
+
+                list.innerHTML = this.notes.map(note => `
+                    <div class="bg-white/5 border border-white/10 p-4 rounded-xl hover:bg-white/10 transition-colors">
+                        <p class="text-white text-sm mb-2">${note.text}</p>
+                        <div class="text-xs text-brand-muted flex gap-2">
+                            <span>${note.date}</span>
+                            <span class="text-brand-cyan">• AI Processed</span>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        };
+
+
+        // --- ANIMATION CONTROLLER ---
+
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Staggered Text Reveal
+            anime({
+                targets: '.stagger-text',
+                translateY: [20, 0],
+                opacity: [0, 1],
+                delay: anime.stagger(100, {start: 300}),
+                easing: 'easeOutExpo',
+                duration: 1200
+            });
+
+            // 2. Phone Parallax
+            const phone = document.getElementById('hero-phone');
+            document.addEventListener('mousemove', (e) => {
+                const x = (window.innerWidth / 2 - e.pageX) / 50;
+                const y = (window.innerHeight / 2 - e.pageY) / 50;
+                const rotateX = 15 + y; 
+                const rotateY = -10 + x;
+                phone.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(5deg)`;
+            });
+
+            // 3. Scroll Reveal
+            const revealElements = document.querySelectorAll('.reveal-on-scroll');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        anime({
+                            targets: entry.target, translateY: [30, 0], opacity: [0, 1],
+                            easing: 'easeOutCubic', duration: 800
+                        });
+                        
+                        // Animate lines if present
+                        if(entry.target.querySelector('.connection-line')) {
+                            anime({
+                                targets: '.connection-line',
+                                strokeDashoffset: [anime.setDashoffset, 0],
+                                easing: 'easeInOutSine',
+                                duration: 1500,
+                                delay: function(el, i) { return i * 250 },
+                                direction: 'alternate',
+                                loop: true
+                            });
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+            revealElements.forEach(el => observer.observe(el));
+
+            // 4. Init Particles
+            initParticles();
+            
+            // 5. Init Vault UI
+            AppState.renderVault();
+        });
+
+        // --- INTERACTIVE FEATURES ---
+
+        function switchPhoneView(viewName) {
+            document.querySelectorAll('.screen-view').forEach(el => {
+                el.classList.remove('active');
+                el.style.opacity = '0';
+                el.style.transform = 'translateX(-20px)';
+            });
+            const target = document.getElementById(`phone-view-${viewName}`);
+            target.classList.add('active');
+            setTimeout(() => {
+                target.style.opacity = '1';
+                target.style.transform = 'translateX(0)';
+            }, 50);
+        }
+
+        let isRecording = false;
+        const potentialThoughts = [
+            "Remind me to check the Q3 financial reports next Monday.",
+            "Idea: A coffee shop that only serves cold brew in the winter.",
+            "Book recommendation: 'Project Hail Mary' by Andy Weir.",
+            "Don't forget to buy milk and eggs on the way home."
+        ];
+
+        function toggleRecording() {
+            isRecording = !isRecording;
+            const btn = document.getElementById('record-btn');
+            const status = document.getElementById('recording-status');
+            const wave = document.getElementById('audio-wave');
+            const output = document.getElementById('transcription-output');
+
+            if (isRecording) {
+                // Start
+                btn.classList.add('bg-red-500', 'text-white', 'animate-pulse');
+                btn.classList.remove('bg-brand-cyan/20', 'text-brand-cyan');
+                status.style.opacity = '1';
+                wave.style.opacity = '1';
+                output.style.opacity = '0.5';
+                output.innerText = "Listening...";
+                
+                // Simulate Transcription
+                setTimeout(() => {
+                    if(isRecording) {
+                        output.style.opacity = '1';
+                        // Pick random thought
+                        const text = potentialThoughts[Math.floor(Math.random() * potentialThoughts.length)];
+                        output.innerText = text;
+                        
+                        // Auto stop and save
+                        setTimeout(() => {
+                            if(isRecording) {
+                                toggleRecording(); // stop UI
+                                AppState.addNote(text); // Save to Real Vault
+                            }
+                        }, 2000);
+                    }
+                }, 1500);
+                
+            } else {
+                // Stop
+                btn.classList.remove('bg-red-500', 'text-white', 'animate-pulse');
+                btn.classList.add('bg-brand-cyan/20', 'text-brand-cyan');
+                status.style.opacity = '0';
+                wave.style.opacity = '0.3';
+            }
+        }
+
+        function handleChatSubmit(e) {
+            e.preventDefault();
+            const input = document.getElementById('chat-input');
+            const container = document.getElementById('chat-container');
+            const text = input.value.trim();
+            if (!text) return;
+
+            // 1. User Msg
+            container.insertAdjacentHTML('beforeend', `
+                <div class="flex justify-end animate-[fadeIn_0.3s_ease-out]">
+                    <div class="bg-brand-cyan text-brand-dark px-4 py-2 rounded-2xl rounded-tr-sm text-sm font-medium max-w-[85%]">
+                        ${text}
+                    </div>
+                </div>`);
+            input.value = '';
+            container.scrollTop = container.scrollHeight;
+
+            // 2. Loading
+            const loadingId = 'loading-' + Date.now();
+            container.insertAdjacentHTML('beforeend', `
+                <div id="${loadingId}" class="flex justify-start animate-[fadeIn_0.3s_ease-out]">
+                    <div class="bg-white/10 text-brand-text px-4 py-3 rounded-2xl rounded-tl-sm text-sm border border-white/5">
+                        <div class="flex gap-1">
+                            <div class="w-1.5 h-1.5 bg-brand-cyan rounded-full typing-dot"></div>
+                            <div class="w-1.5 h-1.5 bg-brand-cyan rounded-full typing-dot"></div>
+                            <div class="w-1.5 h-1.5 bg-brand-cyan rounded-full typing-dot"></div>
+                        </div>
+                    </div>
+                </div>`);
+            container.scrollTop = container.scrollHeight;
+
+            // 3. Logic: Search Vault
+            setTimeout(() => {
+                document.getElementById(loadingId).remove();
+                
+                const foundNotes = AppState.searchNotes(text); // Simple Keyword Search
+                let responseText = "";
+                
+                if (foundNotes.length > 0) {
+                    responseText = `I found ${foundNotes.length} related note(s) in your vault: "${foundNotes[0].text}"`;
+                } else {
+                    responseText = "I don't see anything about that in your vault yet. Try capturing a note about it first!";
+                }
+
+                container.insertAdjacentHTML('beforeend', `
+                    <div class="flex justify-start animate-[fadeIn_0.3s_ease-out]">
+                        <div class="bg-white/10 text-brand-text px-4 py-3 rounded-2xl rounded-tl-sm text-sm border border-white/5 max-w-[85%]">
+                            <div class="flex items-center gap-2 mb-2 text-brand-cyan text-xs uppercase tracking-wide">
+                                <i data-lucide="sparkles" class="w-3 h-3"></i> Answer
+                            </div>
+                            <p>${responseText}</p>
+                        </div>
+                    </div>`);
+                container.scrollTop = container.scrollHeight;
+            }, 1500);
+        }
+
+        // Modal Logic
+        function openModal(type) {
+            const backdrop = document.getElementById('modal-backdrop');
+            ['signup', 'video', 'vault'].forEach(id => {
+                document.getElementById('modal-'+id).classList.add('hidden');
+            });
+            document.getElementById('modal-'+type).classList.remove('hidden');
+            backdrop.classList.add('active');
+            
+            // Re-render vault if opening
+            if(type === 'vault') AppState.renderVault();
+        }
+
+        function closeModal() {
+            document.getElementById('modal-backdrop').classList.remove('active');
+        }
+
+        document.getElementById('modal-backdrop').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeModal();
+        });
+
+        // Toast
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.innerText = msg;
+            t.classList.add('active');
+            setTimeout(() => t.classList.remove('active'), 3000);
+        }
+
+        // Particles
+        function initParticles() {
+            const canvas = document.getElementById('neural-canvas');
+            const parent = document.getElementById('hero-section');
+            const ctx = canvas.getContext('2d');
+            let width, height, particles = [];
+            
+            function resize() {
+                width = canvas.width = parent.offsetWidth;
+                height = canvas.height = parent.offsetHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.vx = (Math.random() - 0.5) * 0.5;
+                    this.vy = (Math.random() - 0.5) * 0.5;
+                    this.size = Math.random() * 2 + 1;
+                    this.color = Math.random() > 0.5 ? '#00D4FF' : '#4F46E5';
+                }
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    if (this.x < 0 || this.x > width) this.vx *= -1;
+                    if (this.y < 0 || this.y > height) this.vy *= -1;
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+                }
+            }
+
+            for (let i = 0; i < 50; i++) particles.push(new Particle());
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                particles.forEach((p, i) => {
+                    p.update();
+                    p.draw();
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const p2 = particles[j];
+                        const dx = p.x - p2.x;
+                        const dy = p.y - p2.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 150) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = `rgba(0, 212, 255, ${1 - dist / 150})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.stroke();
+                        }
+                    }
+                });
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+    </script>
+</body>
+</html>
