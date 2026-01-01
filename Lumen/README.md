@@ -12,11 +12,18 @@ A high-fidelity Single-Page Application (SPA) prototype for an AI-powered "Secon
 
 ---
 
-<div align="center">
-  <a href="#" target="_blank">
-    <img src="https://img.shields.io/badge/View_Live_Demo-1F2937?style=for-the-badge&logo=vercel&logoColor=white" alt="View Live Demo"/>
-  </a>
-</div>
+# 📸 Screenshots
+
+<div align="center"> <table width="100%" style="border-collapse: collapse; border: none;"> 
+  <tr> <td align="center" valign="middle" style="padding: 5px; border: none;"> 
+    <img src="https://github.com/Dibyaranjan27/web-development-projects/blob/main/Lumen/fullsize%20view.png" alt="Full page view" width="100%" style="border-radius: 8px; display: block;"> </td> 
+     </tr> 
+  </table> </div>
+  <div align="center"> <table width="100%" style="border-collapse: collapse; border: none;"> 
+  <tr> <td align="center" valign="middle" style="padding: 5px; border: none;"> 
+      <img src="https://github.com/Dibyaranjan27/web-development-projects/blob/main/Lumen/login_lumen.png" alt="Login View" width="100%" style="border-radius: 8px; display: block;"> </td>
+<td  align="center" valign="middle" style="padding: 5px; border: none;"> 
+        <img src="https://github.com/Dibyaranjan27/web-development-projects/blob/main/Lumen/my_vault_lumen.png" alt="My vault" width="100%" style="border-radius: 8px; display: block;"> </td> </tr> </table> </div>
 
 ---
 
