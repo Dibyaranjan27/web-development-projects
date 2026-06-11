@@ -1,6 +1,3 @@
-<div align="center">
-  <img src="img/forty_image_01.jpg" alt="Wanderlust Photography Banner" width="100%" style="border-radius: 12px; margin-bottom: 20px; max-height: 250px; object-fit: cover;" />
-</div>
 
 <h1 align="center">📸 Wanderlust Photography 🌍</h1>
 
@@ -48,9 +45,21 @@ If you think it turned out cool, feel free to drop a **star ⭐** or **fork it �
   <table>
     <tr>
       <td align="center">
-        <img src="img/forty_image_11.jpg" alt="Gallery Preview" width="400">
+        <img src="img/homepage.png" alt="Home Page" width="400">
         <br/>
-        <em>Beautiful Gallery Rollovers</em>
+        <em>Home Page</em>
+      </td>
+      <td align="center">
+        <img src="img/aboutpage.png" alt="About Page" width="400">
+        <br/>
+        <em>About Page</em>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" colspan="2">
+        <img src="img/philosphypage.png" alt="Philosophy Page" width="400">
+        <br/>
+        <em>Philosophy Page</em>
       </td>
     </tr>
   </table>
