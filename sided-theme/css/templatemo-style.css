@@ -663,7 +663,7 @@ hr {
   .tm-section-text-container-4 {
     padding-left: 15px;
     padding-right: 15px;
-    max-width: 320px;
+    max-width: 100%;
   }
 
   .tm-section-image-container {
@@ -899,18 +899,20 @@ hr {
 
 @media (max-width: 529px) {
   .grid {
-    max-width: 300px;
+    max-width: 100%;
     overflow-x: hidden;
   }
   .grid figure {
     flex: 1 0 100%;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .tm-section-text-container-4 {
-    max-width: 320px;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
-    padding: 30px;
+    padding: 30px 15px;
   }
 }
 
