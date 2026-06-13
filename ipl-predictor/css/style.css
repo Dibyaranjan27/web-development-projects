@@ -1056,10 +1056,12 @@ h1, h2, h3, h4, h5, h6, .services_taital, .about_taital, .client_taital, .choose
     background-color: transparent !important;
 }
 
-/* Glassmorphism for Navbar on Scroll */
+/* Restore Hero Background */
 .header_section {
-    background-color: transparent !important;
-    background-image: none !important;
+    background-color: var(--bg-dark) !important;
+    background-image: linear-gradient(rgba(15, 17, 26, 0.8), rgba(15, 17, 26, 0.9)), url(../images/banner-bg.png) !important;
+    background-size: cover !important;
+    background-position: center !important;
     position: relative;
     overflow: hidden;
 }
@@ -1070,7 +1072,8 @@ h1, h2, h3, h4, h5, h6, .services_taital, .about_taital, .client_taital, .choose
     top: -50%; left: -50%; right: -50%; bottom: -50%;
     background: radial-gradient(circle at top right, rgba(112, 0, 255, 0.2), transparent 40%),
                 radial-gradient(circle at bottom left, rgba(0, 240, 255, 0.1), transparent 40%);
-    z-index: -1;
+    z-index: 0;
+    pointer-events: none;
     animation: rotateBg 30s linear infinite;
 }
 
@@ -1181,4 +1184,37 @@ h1, h2, h3, h4, h5, h6, .services_taital, .about_taital, .client_taital, .choose
 }
 .carousel-indicators .active {
     background-color: var(--primary) !important;
+}
+
+/* Fix distorted logos */
+.about_img, .client_img img {
+    width: auto !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: 250px !important;
+    object-fit: contain;
+    margin: 0 auto;
+    display: block;
+    float: none !important;
+}
+
+/* Fix subscribe input and button */
+.input_btn_main {
+    align-items: center !important;
+}
+.subscribe_bt {
+    margin-right: 5px;
+}
+.subscribe_bt a {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 25px !important;
+    border-radius: 30px !important;
+    height: 44px !important;
+    margin: 0 !important;
+}
+.mail_text {
+    flex-grow: 1 !important;
+    width: auto !important;
 }
