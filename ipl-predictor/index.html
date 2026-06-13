@@ -304,5 +304,76 @@
       <!-- javascript --> 
       <script src="js/owl.carousel.js"></script>
       <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>    
+      <!-- Prediction Modal -->
+      <div id="predictModal" class="modal-overlay hidden">
+          <div class="glass-modal">
+              <button class="close-btn" onclick="closeModal()"><i class="fa fa-times"></i></button>
+              <h2 id="modalTitle">Predict Match</h2>
+              <div class="modal-body">
+                  <p>Select your winning probability for <strong id="selectedTeam">Team</strong>:</p>
+                  <div class="slider-container">
+                      <input type="range" min="1" max="100" value="50" class="glass-slider" id="probSlider">
+                      <span id="probValue" class="prob-badge">50%</span>
+                  </div>
+                  <div class="btn_main" style="width: 100%; border:none; margin-top:10px;" onclick="confirmPrediction()"><a href="#" style="margin-top:0;">Confirm Prediction</a></div>
+              </div>
+          </div>
+      </div>
+
+      <!-- Toast Notification -->
+      <div id="toast" class="glass-toast hidden">
+          <i class="fa fa-check-circle"></i> <span id="toastMsg">Prediction Saved Successfully!</span>
+      </div>
+
+      <script>
+          const modal = document.getElementById('predictModal');
+          const teamNameEl = document.getElementById('selectedTeam');
+          const slider = document.getElementById('probSlider');
+          const probVal = document.getElementById('probValue');
+          const toast = document.getElementById('toast');
+
+          slider.oninput = function() {
+              probVal.textContent = this.value + '%';
+          }
+
+          function openPredictModal(team) {
+              teamNameEl.textContent = team;
+              slider.value = 50;
+              probVal.textContent = '50%';
+              modal.classList.remove('hidden');
+          }
+
+          function closeModal() {
+              modal.classList.add('hidden');
+          }
+
+          function confirmPrediction() {
+              closeModal();
+              showToast(`Prediction for ${teamNameEl.textContent} recorded at ${slider.value}%!`);
+          }
+
+          function showToast(msg) {
+              document.getElementById('toastMsg').textContent = msg;
+              toast.classList.remove('hidden');
+              setTimeout(() => {
+                  toast.classList.add('hidden');
+              }, 3000);
+          }
+
+          document.addEventListener('DOMContentLoaded', () => {
+              document.querySelectorAll('.btn_main a, .read_bt a').forEach(el => {
+                  if (el.textContent.trim().toLowerCase() === 'predict') {
+                      el.addEventListener('click', (e) => {
+                          e.preventDefault();
+                          // try to find team name
+                          let container = el.closest('.col-md-4') || el.closest('.container');
+                          let title = container.querySelector('h1') || container.querySelector('h3');
+                          let teamName = title ? title.textContent.trim() : "this team";
+                          openPredictModal(teamName);
+                      });
+                  }
+              });
+          });
+      </script>
    </body>
 </html>
