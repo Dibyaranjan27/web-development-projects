@@ -1152,3 +1152,33 @@ h1, h2, h3, h4, h5, h6, .services_taital, .about_taital, .client_taital, .choose
     backdrop-filter: blur(10px); transition: all 0.3s ease;
 }
 .glass-toast.hidden { bottom: -100px; opacity: 0; }
+
+/* Center Buttons safely */
+.btn_main {
+    display: flex !important;
+    justify-content: center !important;
+    margin: 20px auto 0 !important;
+    width: 100% !important;
+}
+.btn_main a {
+    float: none !important;
+    width: 170px !important;
+    display: inline-block !important;
+    margin-top: 0 !important;
+}
+
+/* Fix carousel indicators */
+.carousel-indicators {
+    bottom: -50px;
+}
+.carousel-indicators li {
+    background-color: var(--secondary) !important;
+    border-radius: 50% !important;
+    width: 12px !important; 
+    height: 12px !important;
+    border: none !important;
+    margin: 0 5px;
+}
+.carousel-indicators .active {
+    background-color: var(--primary) !important;
+}
