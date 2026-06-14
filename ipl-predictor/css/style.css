@@ -1059,7 +1059,7 @@ h1, h2, h3, h4, h5, h6, .services_taital, .about_taital, .client_taital, .choose
 /* Restore Hero Background */
 .header_section {
     background-color: var(--bg-dark) !important;
-    background-image: linear-gradient(rgba(15, 17, 26, 0.8), rgba(15, 17, 26, 0.9)), url(../images/banner-bg.png) !important;
+    background-image: url(../images/banner-bg.png) !important;
     background-size: cover !important;
     background-position: center !important;
     position: relative;
