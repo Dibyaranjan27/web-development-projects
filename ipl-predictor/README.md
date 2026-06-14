@@ -33,11 +33,7 @@
 
 ## 📜 The Story Behind This Project
 
-This project actually has a fun backstory! It was originally made by me for one of my friends during our very first year project assignments. Back then, it was just a simple, standard Bootstrap template. 
-
-Recently, I decided to look back at it and completely revamp the design. I injected modern web design principles into it—swapping out the old-school look for a sleek dark mode, adding premium glassmorphism overlays, and introducing smooth interactive components. What started as a basic college assignment for a friend is now a stunning, high-end web page that I'm proud to share!
-
-If you think it turned out cool, feel free to drop a **star ⭐** or **fork it 🍴**!
+This project was made by me for one of my friends in our first year project assignments.
 
 ---
 
