@@ -43,9 +43,26 @@ This project was originally built during my first year of college to help a frie
   <table>
     <tr>
       <td align="center">
-        <img src="images/about-img.png" alt="IPL Predictor Home" width="400">
+        <img src="images/homepage.png" alt="Home Page" width="400">
         <br/>
-        <em>Full view of the Webpage</em>
+        <em>Home Page</em>
+      </td>
+      <td align="center">
+        <img src="images/aboutpage.png" alt="About Page" width="400">
+        <br/>
+        <em>About Page</em>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img src="images/loginpage.png" alt="Login Page" width="400">
+        <br/>
+        <em>Login/Register Page</em>
+      </td>
+      <td align="center">
+        <img src="images/contactpage.png" alt="Contact Page" width="400">
+        <br/>
+        <em>Contact Page</em>
       </td>
     </tr>
   </table>
