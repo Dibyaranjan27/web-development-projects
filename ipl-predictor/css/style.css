@@ -686,7 +686,7 @@ button {
 }
 
 .client_taital_left {
-    width: 40%;
+    width: 100%;
     float: left;
 }
 
@@ -1186,7 +1186,7 @@ h1, h2, h3, h4, h5, h6, .services_taital, .about_taital, .client_taital, .choose
     background-color: var(--primary) !important;
 }
 
-/* Fix distorted logos */
+/* Fix distorted logos and give them a clean card look for white backgrounds */
 .about_img, .client_img img {
     width: auto !important;
     max-width: 100% !important;
@@ -1196,6 +1196,10 @@ h1, h2, h3, h4, h5, h6, .services_taital, .about_taital, .client_taital, .choose
     margin: 0 auto;
     display: block;
     float: none !important;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
 /* Fix subscribe input and button */
