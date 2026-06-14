@@ -1,6 +1,3 @@
-<div align="center">
-  <img src="images/banner-bg.png" alt="IPL Predictor Banner" width="100%" style="border-radius: 12px; margin-bottom: 20px; max-height: 250px; object-fit: cover;" />
-</div>
 
 <h1 align="center">🏏 IPL Predictor ✨</h1>
 
