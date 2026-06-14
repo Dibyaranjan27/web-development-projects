@@ -42,7 +42,7 @@ This project was originally built during my first year of college to help a frie
 <div align="center">
   <table>
     <tr>
-      <td align="center">
+      <td rowspan="3" align="center" valign="middle">
         <img src="images/homepage.png" alt="Home Page" width="400">
         <br/>
         <em>Home Page</em>
@@ -59,8 +59,10 @@ This project was originally built during my first year of college to help a frie
         <br/>
         <em>Login/Register Page</em>
       </td>
+    </tr>
+    <tr>
       <td align="center">
-        <img src="images/contactpage.png" alt="Contact Page" width="400">
+        <img src="images/contactpage.png" alt="Login Page" width="400">
         <br/>
         <em>Contact Page</em>
       </td>
