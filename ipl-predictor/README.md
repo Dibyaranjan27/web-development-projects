@@ -33,7 +33,7 @@
 
 ## 📜 The Story Behind This Project
 
-This project was made by me for one of my friends in our first year project assignments.
+This project was originally built during my first year of college to help a friend with their class assignment. It served as a great early learning experience in web development, and I'm sharing it here as part of my portfolio.
 
 ---
 
