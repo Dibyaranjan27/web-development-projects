@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>Project</title>
+      <title>registerpage</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -72,44 +72,107 @@
                   <ul>
                      <li><a href="index.html">Home</a></li>
                      <li><a href="about.html">About</a></li>
-                     <li class="active"><a href="blog.html">Blog</a></li>
+                     <li><a href="blog.html">Blog</a></li>
                      <li><a href="login.html">Login</a></li>
-                     <li><a href="register.html">Register</a></li>
+                     <li class="active"><a href="register.html">Register</a></li>
                      <li><a href="contact.html">Contact us</a></li>
                   </ul>
                </div>
             </div>
          </div>
-         <!-- banner section start -->
-         <!-- banner section removed for blog page -->
       </div>
       <!-- header section end -->
-      <!-- services section start -->
+      <!-- register section start -->
       <div class="services_section layout_padding">
          <div class="container">
-            <h1 class="services_taital">Blogs</h1>
-            <p class="services_text"></p>
-            <div class="services_section_2">
-               <div class="row">
-                  <div class="col-md-4">
-                     <div><img src="https://www.bitely.in/img/blog.jpg" class="services_img"></div>
-                     <div class="btn_main"><a href="#">personal Blog Read</a></div>
-                  </div>
-                  <div class="col-md-4">
-                     <div><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5VtS-LZBxRt-fcHSIPHfhWqN_IliX78MTNSWDsMgmnuaicgvnTXHEQ1LytaTAVbtN9K0RVjdvBZM&usqp=CAU&ec=48665698" class="services_img"></div>
-                     <div class="btn_main active"><a href="#">Business Blog<br>Read</a></div>
-                  </div>
-                  <div class="col-md-4">
-                     <div><img src="https://media.istockphoto.com/id/496848472/vector/blog-blogging-and-blogglers-theme.jpg?s=612x612&w=0&k=20&c=mSpcEVoA-YeViMFD--ozz_CyP1UXnEgw89MpU8bwd9s="></div>
-                     <div class="btn_main"><a href="#">Public Blog<br>Read</a></div>
-                  </div>
+      <div class="regi">
+      <h1 class="title2">Registration</h1>
+         <form class=" g-3 needs-validation" novalidate>
+             <label for="validationCustom01" class="form-label">First name</label>
+             <div class="form-floating mb-3">
+               <input type="text" class="form-control" id="validationCustom01" required>
+               <div class="valid-feedback">
+                 valid.
                </div>
-            </div>
-            </div>
-            </div>
-      <!-- services section end -->
-      <!-- about section removed -->
-      <!-- client and choose sections removed -->
+               <div class="invalid-feedback">
+                  Please provide your Firstname.
+                </div>
+             </div>
+             <label for="validationCustom02" class="form-label">Last name</label>
+             <div class="form-floating mb-3md-4">
+               <input type="text" class="form-control" id="validationCustom02" required>
+               <div class="valid-feedback">
+                 Valid
+               </div>
+               <div class="invalid-feedback">
+                  Please provide your Lastname.
+                </div>
+             </div>
+             <label for="validationCustomUsername" class="form-label">Username</label>
+             <div class="form-floating mb-3md-4">
+               <div class="input-group has-validation">
+                 <span class="input-group-text" id="inputGroupPrepend">@</span>
+                 <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+                 <div class="valid-feedback">
+                  Valid
+                </div>
+                 <div class="invalid-feedback">
+                   Please choose a username.
+                 </div>
+               </div>
+             </div>
+             <label for="validationCustomemail" class="form-label">Email</label>
+             <div class="form-floating mb-3md-4">
+               <div class="input-group has-validation">
+                 <input type="email" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+                 <div class="valid-feedback">
+                  Valid
+                </div>
+                 <div class="invalid-feedback">
+                   Please enter a email id.
+                 </div>
+               </div>
+             </div>
+             <label for="validationCustom03" class="form-label">City</label>
+             <div class="form-floating mb-3md-6">
+               <input type="text" class="form-control" id="validationCustom03" required>
+               <div class="valid-feedback">
+                  Valid
+                </div>
+               <div class="invalid-feedback">
+                 Please provide a valid city.
+               </div>
+             </div>
+             <div class="form-floating mb-3md-3">
+               <label for="validationCustom05" class="form-label">Password</label>
+               <input type="password" class="form-control" id="validationCustom05" required>
+               <div class="valid-feedback">
+                  Valid
+                </div>
+               <div class="invalid-feedback">
+                 Please provide a valid password.
+               </div>
+             </div>
+             <div class="form-floating mb-312">
+               <div class="form-check">
+                 <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                 <label class="form-check-label" for="invalidCheck">
+                   Agree to terms and conditions
+                 </label>
+                 <div class="invalid-feedback">
+                   You must agree before submitting.
+                 </div>
+               </div>
+             </div>
+             <br>
+             <div class="form-floating mb-312">
+               <button class="btn btn-dark" type="submit">Submit form</button>
+             </div>
+           </form>
+           </div>
+           </div>
+       </div>
+      <!-- register section end -->
       <!-- footer section start -->
       <div class="footer_section layout_padding">
          <div class="container">
