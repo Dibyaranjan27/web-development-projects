@@ -635,7 +635,6 @@ button {
 .client_section {
     width: 100%;
     float: left;
-    padding-bottom: 160px;
 }
 
 .client_taital {
@@ -703,7 +702,7 @@ button {
     text-align: center;
 }
 .client_img img {
-    max-width: 150px;
+    max-width: 300px;
     height: auto;
     object-fit: contain;
     border-radius: 10px;
