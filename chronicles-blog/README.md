@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="images/banner-bg.png" alt="Chronicles Banner" width="100%" style="border-radius: 12px; margin-bottom: 20px; max-height: 250px; object-fit: cover;" />
+  <img src="images/chronicles-banner.png" alt="Chronicles Banner" width="100%" style="border-radius: 12px; margin-bottom: 20px; max-height: 320px; object-fit: cover;" />
 </div>
 
 <h1 align="center">✍️ Chronicles Blog 🌍</h1>
@@ -19,6 +19,7 @@
 
 ## 📖 Table of Contents
 - [The Story Behind This Project](#-the-story-behind-this-project)
+- [Screenshots](#-screenshots)
 - [Key Features](#-key-features)
 - [Tech Stack](#-tech-stack)
 - [Installation and Usage](#-installation-and-usage)
@@ -36,6 +37,39 @@ This project originally started as a standard college assignment where I had to 
 I recently went back to it and completely polished it up. I restructured the layouts, added custom vector illustrations for the different blog categories, fixed a bunch of responsive mobile issues, and implemented a sleek, consistent dark theme for the authentication pages (Login & Register). It's really cool seeing how a simple assignment can transform into a professional-looking frontend with just some careful styling and attention to detail.
 
 If you like how it turned out, feel free to drop a **star ⭐** or **fork it 🍴**!
+
+---
+
+## 🖥️ Screenshots
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <img src="images/chronicles-homepage.png" alt="Homepage" width="400">
+        <br/>
+        <em>Homepage & Welcome Section</em>
+      </td>
+      <td align="center">
+        <img src="images/chronicles-blogpage.png" alt="Blog Listing" width="400">
+        <br/>
+        <em>Blog Category Listings</em>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img src="images/chronicles-blogdetailspage.png" alt="Blog Details" width="400">
+        <br/>
+        <em>Detailed Blog Reading View</em>
+      </td>
+      <td align="center">
+        <img src="images/chronicles-loginpage.png" alt="Login Page" width="400">
+        <br/>
+        <em>Premium Dark Auth Page</em>
+      </td>
+    </tr>
+  </table>
+</div>
 
 ---
 
