@@ -51,21 +51,45 @@ If you like how it turned out, feel free to drop a **star ‚≠ê** or **fork it üç
         <em>Homepage & Welcome Section</em>
       </td>
       <td align="center">
-        <img src="images/chronicles-blogpage.png" alt="Blog Listing" width="400">
+        <img src="images/chronicles-aboutpage.png" alt="About Page" width="400">
         <br/>
-        <em>Blog Category Listings</em>
+        <em>About Page</em>
       </td>
     </tr>
     <tr>
       <td align="center">
-        <img src="images/chronicles-blogdetailspage.png" alt="Blog Details" width="400">
+        <img src="images/chronicles-blogpage.png" alt="Blog Listing" width="400">
+        <br/>
+        <em>Blog Category Listings</em>
+      </td>
+      <td align="center">
+        <img src="images/chronicles-blogdetailspage.png" alt="Blog Details 1" width="400">
         <br/>
         <em>Detailed Blog Reading View</em>
       </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img src="images/chronicles-blogdetailspage2.png" alt="Blog Details 2" width="400">
+        <br/>
+        <em>Detailed Blog Reading View 2</em>
+      </td>
+      <td align="center">
+        <img src="images/chronicles-contactpage.png" alt="Contact Page" width="400">
+        <br/>
+        <em>Contact Us Page</em>
+      </td>
+    </tr>
+    <tr>
       <td align="center">
         <img src="images/chronicles-loginpage.png" alt="Login Page" width="400">
         <br/>
-        <em>Premium Dark Auth Page</em>
+        <em>Premium Dark Login Page</em>
+      </td>
+      <td align="center">
+        <img src="images/chronicles-registerpage.png" alt="Register Page" width="400">
+        <br/>
+        <em>Premium Dark Registration Page</em>
       </td>
     </tr>
   </table>
