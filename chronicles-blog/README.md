@@ -38,6 +38,8 @@ I recently went back to it and completely polished it up. I restructured the lay
 
 If you like how it turned out, feel free to drop a **star ⭐** or **fork it 🍴**!
 
+I really like what I made and wanted to share it with you all. In the future, I am planning to make my blogging website complete and fully functional with a backend, rather than just these static pages. I am also very open to suggestions, so if you have any feedback or ideas, please let me know!
+
 ---
 
 ## 🖥️ Screenshots
@@ -45,7 +47,7 @@ If you like how it turned out, feel free to drop a **star ⭐** or **fork it �
 <div align="center">
   <table>
     <tr>
-      <td align="center">
+      <td rowspan="2" align="center" valign="middle">
         <img src="images/chronicles-homepage.png" alt="Homepage" width="400">
         <br/>
         <em>Homepage & Welcome Section</em>
@@ -62,22 +64,17 @@ If you like how it turned out, feel free to drop a **star ⭐** or **fork it �
         <br/>
         <em>Blog Category Listings</em>
       </td>
-      <td align="center">
+    </tr>
+    <tr>
+    <td align="center">
         <img src="images/chronicles-blogdetailspage.png" alt="Blog Details 1" width="400">
         <br/>
         <em>Detailed Blog Reading View</em>
       </td>
-    </tr>
-    <tr>
       <td align="center">
         <img src="images/chronicles-blogdetailspage2.png" alt="Blog Details 2" width="400">
         <br/>
         <em>Detailed Blog Reading View 2</em>
-      </td>
-      <td align="center">
-        <img src="images/chronicles-contactpage.png" alt="Contact Page" width="400">
-        <br/>
-        <em>Contact Us Page</em>
       </td>
     </tr>
     <tr>
@@ -90,6 +87,13 @@ If you like how it turned out, feel free to drop a **star ⭐** or **fork it �
         <img src="images/chronicles-registerpage.png" alt="Register Page" width="400">
         <br/>
         <em>Premium Dark Registration Page</em>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center">
+        <img src="images/chronicles-contactpage.png" alt="Contact Page" width="400">
+        <br/>
+        <em>Contact Us Page</em>
       </td>
     </tr>
   </table>
