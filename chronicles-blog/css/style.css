@@ -664,14 +664,15 @@ button {
 }
 
 .box_left {
-    width: 48%;
+    width: 100%;
 }
 
 .box_right {
-    width: 48%;
+    width: 100%;
     float: right;
-    padding-top: 65px;
-    margin-left: 30px;
+    justify-content: center;
+    /* padding-top: 65px;
+    margin-left: 30px; */
 }
 
 .lorem_text {
@@ -686,8 +687,9 @@ button {
 }
 
 .client_taital_left {
-    width: 40%;
+    width: 100%;
     float: left;
+    text-align: center;
 }
 
 .client_taital_right {
@@ -698,7 +700,14 @@ button {
 .client_img {
     width: 100%;
     float: left;
-    text-align: left;
+    text-align: center;
+}
+.client_img img {
+    max-width: 150px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px;
+    margin: 0 auto;
 }
 
 .quick_icon {
