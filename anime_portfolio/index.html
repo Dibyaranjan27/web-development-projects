@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chronicles — Anime Cinematic Portfolio</title>
+  <meta name="description" content="An anime-inspired cinematic portfolio and landing page featuring 2D parallax scrolling, Three.js 3D WebGL scene, and smooth scene transitions.">
+
+  <!-- Google Fonts: Sacramento (Calligraphy), Merriweather (Serif), Trirong (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Sacramento&family=Trirong:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">`n  <!-- Modular Stylesheets -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/parallax.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/transitions.css">
+</head>
+<body>
+
+  <!-- Fullscreen 4-Phase Cinematic Shutter Overlay -->
+  <div id="cinematic-shutter" class="cinematic-shutter">
+    <div class="shutter-curtain shutter-top"></div>
+    <div class="shutter-center-stage">
+      <div class="speedlines-effect"></div>
+      <div class="crest-circle">
+        <span class="crest-kanji">物</span>
+      </div>
+      <span class="crest-label">CHRONICLES</span>
+    </div>
+    <div class="shutter-curtain shutter-bottom"></div>
+  </div>
+
+  
+
+  <!-- Atmospheric Vignette -->
+  <div class="vignette-overlay"></div>
+
+  <!-- Site Header & Navigation Bar -->
+  <header class="site-header">
+    <a href="#project" class="brand-wrapper" data-scene="project">
+      <img src="pic/avatar.png" alt="Dibyaranjan Avatar" class="brand-avatar">
+      <div class="brand-text">
+        <span class="brand-title">Chronicles</span>
+        <span class="brand-subtitle">By Dibyaranjan</span>
+      </div>
+    </a>
+
+    <nav class="site-nav">
+      <a href="#project" class="nav-link active" data-scene="project">
+        <i class="fa-solid fa-house"></i> Home
+      </a>
+      <a href="#about" class="nav-link" data-scene="about">
+        <i class="fa-solid fa-user-astronaut"></i> About
+      </a>
+      <a href="#contact" class="nav-link" data-scene="contact">
+        <i class="fa-solid fa-envelope-open-text"></i> Contact
+      </a>
+      <a href="#login" class="nav-link" data-scene="login">
+        <i class="fa-solid fa-right-to-bracket"></i> Login
+      </a>
+      <a href="#registration" class="nav-link nav-register" data-scene="registration">
+        <i class="fa-solid fa-user-plus"></i> Register
+      </a>
+    </nav>
+  </header>
+
+  <!-- Central Single Page Application Viewport -->
+  <main id="app-viewport">
+  <!-- Ambient Three.js 3D WebGL Canvas Layer (Moved inside viewport for Z-index sandwich) -->
+  <div id="webgl-container" class="webgl-canvas-container" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none;">
+    <canvas id="webgl-canvas" style="width: 100%; height: 100%; display: block;"></canvas>
+  </div>
+
+    <!-- ======================================================================
+         SECTION 1: PROJECT (HOME)
+         ====================================================================== -->
+    <section id="scene-project" class="scene-section active" data-scene="project">
+      
+      <!-- 2D Multi-Layer Parallax Hero Banner -->
+      <div class="parallax-hero-wrapper">
+        <div class="parallax-solid-bg"></div>
+        <!-- Layer 0: Sky Atmosphere (0.1x) -->
+        <div class="parallax-layer layer-sky"></div>
+
+        <!-- Layer 1: Far Clouds (0.3x) -->
+        <div class="parallax-layer layer-cloud-far">
+          <img src="pic/cloud.png" alt="Far Cloud" class="cloud-item-far-1">
+          <img src="pic/cloud.png" alt="Far Cloud" class="cloud-item-far-2">
+        </div>
+
+        <!-- Layer 2: Anime Calligraphy Ribbons & Silhouette (0.55x) -->
+        <div class="parallax-layer layer-banner">
+          <div class="banner-ribbon-left"></div>
+          <div class="banner-ribbon-right"></div>
+          
+          
+        </div>
+
+        <!-- Layer 3: Foreground Drifting Clouds (0.8x) -->
+        <div class="parallax-layer layer-cloud-near">
+          <img src="pic/cloud.png" alt="Near Cloud" class="cloud-item-near-1">
+          <img src="pic/cloud.png" alt="Near Cloud" class="cloud-item-near-2">
+        </div>
+
+        <!-- Layer 4: Interactive Foreground Hero Content (1.0x) -->
+        <div class="parallax-layer layer-content">
+          <div class="hero-avatar-badge">
+            <img src="pic/avatar.png" alt="Creator Profile">
+          </div>
+          <h2 class="hero-main-title">Let's Blog and Share</h2>
+          <div class="calligraphy-banner">
+            <span class="calligraphy-text">Chronicles By Dibyaranjan</span>
+          </div>
+          <p class="hero-subtitle">
+            An anime-inspired sanctuary of storytelling, visual design, and interactive web craftsmanship.
+            Step into our pastel world of endless curiosity and creative expression.
+          </p>
+          <div class="hero-actions">
+            <a href="#about" class="btn btn-primary" data-scene="about">Discover Our Story</a>
+            <a href="#contact" class="btn btn-coral" data-scene="contact">Request A Call Back</a>
+          </div>
+        </div>
+
+        <!-- Layer 5: Reverse Sakura Particle Flutter (-0.4x) -->
+        <div class="parallax-layer layer-petals">
+          <div class="sakura-petal"></div>
+          <div class="sakura-petal"></div>
+          <div class="sakura-petal"></div>
+          <div class="sakura-petal"></div>
+          <div class="sakura-petal"></div>
+          <div class="sakura-petal"></div>
+        </div>
+      </div>
+
+      <!-- Main Home Content Body -->
+      <div class="container home-content-section">
+        
+        <!-- Three.js 3D Centerpiece Showcase Callout -->
+        <div class="webgl-showcase-box">
+          <div class="webgl-showcase-info">
+            <div class="webgl-status-pill">
+              <span class="status-dot"></span>
+              Three.js WebGL Real-Time Engine Active
+            </div>
+            <h3 style="margin-top: 0.75rem;">Celestial Monolith & Sakura Vortex</h3>
+            <p>
+              Rendering a real-time glowing 3D Torus Knot with metallic PBR shading, an orbital celestial runic ring,
+              and 600 swirling helical mana particles. Move your mouse across the viewport to observe perspective tilt tracking.
+            </p>
+          </div>
+          <div style="text-align: right;">
+            <a href="#about" class="btn btn-outline" data-scene="about">Explore About Scene &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Narrative Content Cards (from Project1 & Chronicles) -->
+        <div class="section-header">
+          <span class="section-badge">Featured Narratives</span>
+          <h3 class="section-title">The Art of Storytelling</h3>
+          <p class="section-subtitle">
+            Thoughtfully curated articles and creative portfolios bridging traditional anime aesthetics with modern web engineering.
+          </p>
+        </div>
+
+        <div class="story-cards-grid">
+          
+          <!-- Card 1 -->
+          <article class="story-card-item anime-card">
+            <div class="story-img-col">
+              <img src="pic/bgimg1.png" alt="The Ocean Voyager">
+            </div>
+            <div class="story-text-col">
+              <span class="story-badge">Voyage & Philosophy</span>
+              <h4 class="story-title">The Maritime Wanderer: Charting Unmapped Dreams</h4>
+              <p class="story-description">
+                Like the solitary traveler setting sail under glowing dawn skies, Chronicles embodies the spirit of exploration.
+                We believe in the profound power of storytelling to connect people, spark new ideas, and inspire personal growth across an ever-changing digital landscape.
+              </p>
+              <hr class="story-divider">
+              <p class="story-description" style="font-size: 0.92rem;">
+                Every passage is crafted with meticulous care, fusing serene pastel palettes and evocative prose to provide a calm oasis for thinkers, designers, and creators worldwide.
+              </p>
+              <a href="#about" class="btn btn-primary" data-scene="about">Read Our Story</a>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="story-card-item reverse anime-card">
+            <div class="story-img-col">
+              <img src="pic/bg2.jpg" alt="Modern Canal Cityscape">
+            </div>
+            <div class="story-text-col">
+              <span class="story-badge">Architecture & Design</span>
+              <h4 class="story-title">Emerald Canals & High-Rise Horizons</h4>
+              <p class="story-description">
+                From bustling clocktowers over cyan rivers to peaceful geometric bridges, urban anime design thrives on harmony between nature and modernity.
+                Here we explore how contemporary web layouts can incorporate warmth, tactile textures, and kinetic depth.
+              </p>
+              <hr class="story-divider">
+              <p class="story-description" style="font-size: 0.92rem;">
+                Experience the intersection of high-performance Vanilla JavaScript architecture and cinematic motion design without the bloat of heavy framework ecosystems.
+              </p>
+              <a href="#contact" class="btn btn-coral" data-scene="contact">Connect With Us</a>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="story-card-item anime-card">
+            <div class="story-img-col" style="background: radial-gradient(circle, #E8F8F5 0%, #D5E5DF 100%); display: flex; align-items: center; justify-content: center;">
+              <img src="pic/login-icon.png" alt="Origami Paper Messenger" style="width: 70%; height: auto; object-fit: contain;">
+            </div>
+            <div class="story-text-col">
+              <span class="story-badge">Connected Whispers</span>
+              <h4 class="story-title">Origami Letters: Reaching Across the Sky</h4>
+              <p class="story-description">
+                A simple paper airplane folded with intention can carry messages across oceans. Have an inquiry, a collaboration idea, or a story you'd like to share?
+                Our door is always open for passionate creators and fellow dreamers.
+              </p>
+              <hr class="story-divider">
+              <p class="story-description" style="font-size: 0.92rem;">
+                Direct inquiries to <strong>22amtics481@gmail.com</strong> or use our instant interactive contact form to request a call back with Dibyaranjan.
+              </p>
+              <a href="#contact" class="btn btn-primary" data-scene="contact">Send An Origami Letter</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 2: ABOUT
+         ====================================================================== -->
+    <section id="scene-about" class="scene-section" data-scene="about">
+      <div class="container" style="padding-top: 2rem;">
+        
+        <!-- About Hero Banner -->
+        <div class="about-hero-banner">
+          <div class="calligraphy-banner">
+            <span class="calligraphy-text">About us</span>
+          </div>
+          <h2 class="section-title">The Story Behind Chronicles</h2>
+          <p class="section-subtitle">
+            A sanctuary built for curious minds, passionate writers, and aesthetic visionaries.
+          </p>
+          <img src="pic/about_illustration.jpg" alt="Voyager Artwork" class="about-voyage-art" style="border-radius: 50%; box-shadow: var(--shadow-glow);">
+        </div>
+
+        <!-- Creator Profile & Narrative Grid -->
+        <div class="about-creator-grid">
+          
+          <!-- Creator Profile Card -->
+          <div class="creator-profile-card anime-card">
+            <div class="creator-avatar-wrap">
+              <img src="pic/avatar.png" alt="Dibyaranjan Profile">
+            </div>
+            <h3 class="creator-name">Dibyaranjan</h3>
+            <span class="creator-role">Creative Architect & Author</span>
+            <p style="font-size: 0.9rem; color: var(--color-ink-muted); line-height: 1.6;">
+              Passionate about Ghibli art styles, generative 3D WebGL interfaces, and crafting poetic digital experiences.
+            </p>
+            <div class="creator-stats">
+              <div>
+                <span class="stat-num">5+</span>
+                <span class="stat-label">Showcases</span>
+              </div>
+              <div>
+                <span class="stat-num">100%</span>
+                <span class="stat-label">Vanilla JS</span>
+              </div>
+            </div>
+            <div style="margin-top: 1.5rem;">
+              <a href="#contact" class="btn btn-coral" style="width: 100%;" data-scene="contact">Get In Touch</a>
+            </div>
+          </div>
+
+          <!-- Story Narrative Card -->
+          <div class="about-story-card anime-card">
+            <span class="section-badge">Our Journey</span>
+            <h3 style="font-family: var(--font-serif); font-size: 2rem; color: var(--color-forest); margin-bottom: 1rem;">
+              Our Story & Founding Vision
+            </h3>
+            
+            <blockquote class="story-lead-quote">
+              "We believe in the profound power of storytelling to connect people, spark new ideas, and inspire personal growth."
+            </blockquote>
+
+            <p class="story-full-text">
+              Welcome to <strong>Chronicles</strong>, your ultimate destination for insightful, engaging, and thought-provoking content.
+              From the latest trends in technology to timeless lifestyle advice, our diverse team of writers is dedicated to delivering
+              high-quality, meticulously researched articles that resonate with our readers.
+            </p>
+
+            <p class="story-full-text">
+              Whether you are looking for motivation, education, or simply a good read to start your day, Chronicles is here to fuel your curiosity
+              and help you navigate an ever-changing world. Every digital page in this portfolio has been architected without bulky third-party
+              frameworks, utilizing pure Vanilla JavaScript, hardware-accelerated 2D depth planes, and Three.js WebGL to demonstrate that lightweight
+              code can deliver breathtaking cinematic elegance.
+            </p>
+
+            <!-- Philosophy Core Values -->
+            <div class="values-grid">
+              <div class="value-item">
+                <div class="value-icon">🍃</div>
+                <h4 class="value-title">Authenticity</h4>
+                <p class="value-desc">Pure, genuine code and storytelling crafted from first principles without facades.</p>
+              </div>
+              <div class="value-item">
+                <div class="value-icon">🎨</div>
+                <h4 class="value-title">Anime Aesthetics</h4>
+                <p class="value-desc">Pastel Ghibli palettes, sumi-e calligraphy, and calming natural atmospheres.</p>
+              </div>
+              <div class="value-item">
+                <div class="value-icon">⚡</div>
+                <h4 class="value-title">Performance</h4>
+                <p class="value-desc">Sub-millisecond DOM transitions, zero console errors, and 60fps parallax depth.</p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 3: CONTACT
+         ====================================================================== -->
+    <section id="scene-contact" class="scene-section" data-scene="contact">
+      <div class="container" style="padding-top: 2rem;">
+        
+        <div class="section-header">
+          <span class="section-badge">Get In Touch</span>
+          <h2 class="section-title">Request A Call Back</h2>
+          <div class="calligraphy-banner">
+            <span class="calligraphy-text">Contact Dibyaranjan</span>
+          </div>
+          <p class="section-subtitle">
+            Have a project in mind, feedback on our chronicles, or looking to collaborate? Drop us a line below.
+          </p>
+        </div>
+
+        <div class="contact-layout-grid">
+          
+          <!-- Contact Form Card -->
+          <div class="contact-form-card anime-card">
+            <div id="contact-form-alert" class="form-alert-banner"></div>
+
+            <form id="contact-form" novalidate>
+              <div class="form-group">
+                <label for="contact-name" class="form-label">Full Name *</label>
+                <input type="text" id="contact-name" class="form-control" placeholder="Enter your full name" required>
+                <span class="input-feedback error">Please provide your name.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-phone" class="form-label">Phone Number</label>
+                <input type="tel" id="contact-phone" class="form-control" placeholder="Enter your phone number">
+              </div>
+
+              <div class="form-group">
+                <label for="contact-email" class="form-label">Email Address *</label>
+                <input type="email" id="contact-email" class="form-control" placeholder="Enter your email address" required>
+                <span class="input-feedback error">Please enter a valid email address.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-message" class="form-label">Message *</label>
+                <textarea id="contact-message" class="form-control" placeholder="Write your message or inquiry here..." rows="5" required></textarea>
+                <span class="input-feedback error">Please write your message.</span>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px;">
+                <span>🚀</span> SEND MESSAGE
+              </button>
+            </form>
+          </div>
+
+          <!-- Contact Sidebar with Origami Paper Airplane -->
+          <div class="contact-sidebar-card">
+            
+            <div class="origami-art-card anime-card">
+              <img src="pic/login-icon.png" alt="Origami Paper Airplane" class="origami-plane-img">
+              <h4 style="font-family: var(--font-serif); color: var(--color-forest); margin-bottom: 0.5rem;">
+                Paper Airplane Dispatch
+              </h4>
+              <p style="font-size: 0.88rem; color: var(--color-ink-muted);">
+                Inspired by classical Japanese origami, every dispatch is handled with personal care and prompt dedication.
+              </p>
+            </div>
+
+            <div class="author-contact-info">
+              <div class="info-item">
+                <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+                <div class="info-text">
+                  <strong>Author Email</strong>
+                  <span>22amtics481@gmail.com</span>
+                </div>
+              </div>
+              <div class="info-item">
+                <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                <div class="info-text">
+                  <strong>Location</strong>
+                  <span>Gujarat / Mumbai, India</span>
+                </div>
+              </div>
+              <div class="info-item">
+                <div class="info-icon"><i class="fa-solid fa-clock"></i></div>
+                <div class="info-text">
+                  <strong>Availability</strong>
+                  <span>Monday - Saturday (9AM - 7PM)</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Newsletter Subscription -->
+            <div class="newsletter-card anime-card">
+              <h4 style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--color-forest); margin-bottom: 0.5rem;">
+                🌸 Chronicles Newsletter
+              </h4>
+              <p style="font-size: 0.85rem; color: var(--color-ink-muted);">
+                Subscribe to receive our seasonal anime design reviews and tech dispatches.
+              </p>
+              <form id="newsletter-form" class="newsletter-form">
+                <input type="email" id="newsletter-email" class="form-control" placeholder="Enter your email" required style="font-size: 0.85rem;">
+                <button type="submit" class="btn btn-coral" style="padding: 10px 18px; font-size: 0.85rem;">
+                  Subscribe
+                </button>
+              </form>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 4: LOGIN & SIGN UP
+         ====================================================================== -->
+    <section id="scene-login" class="scene-section" data-scene="login">
+      <div class="container" style="padding-top: 2rem;">
+        
+        <div class="section-header">
+          <span class="section-badge">Authentication</span>
+          <h2 class="section-title">Welcome To Chronicles</h2>
+          <div class="calligraphy-banner">
+            <span class="calligraphy-text">Login & Sign Up</span>
+          </div>
+          <p class="section-subtitle">
+            Access your reader dashboard or create a new storyteller identity.
+          </p>
+        </div>
+
+        <div class="login-section-wrapper">
+          
+          <div class="login-dual-grid">
+            
+            <!-- Left: Login Form -->
+            <div class="auth-card anime-card">
+              <div class="auth-header">
+                <img src="pic/login-icon.png" alt="Login Icon" class="auth-icon-plane">
+                <h3 class="auth-title">Login</h3>
+                <p class="auth-subtitle">Welcome back to your chronicle session</p>
+              </div>
+
+              <div id="login-alert" class="form-alert-banner"></div>
+
+              <form id="login-form" novalidate>
+                <div class="form-group">
+                  <label for="login-username" class="form-label">Username</label>
+                  <div class="input-addon-group">
+                    <span class="input-addon">@</span>
+                    <input type="text" id="login-username" class="form-control" placeholder="Username" required>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="login-password" class="form-label">Password</label>
+                  <input type="password" id="login-password" class="form-control" placeholder="Enter password" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; margin-top: 1rem;">
+                  Login To Account
+                </button>
+              </form>
+            </div>
+
+            <!-- Right: Sign Up Form -->
+            <div class="auth-card anime-card">
+              <div class="auth-header">
+                <img src="pic/avatar.png" alt="Sign Up Icon" class="auth-icon-plane" style="border-radius: 50%; border: 2px solid var(--color-seafoam);">
+                <h3 class="auth-title">Sign Up</h3>
+                <p class="auth-subtitle">Join the reader community today</p>
+              </div>
+
+              <div id="signup-alert" class="form-alert-banner"></div>
+
+              <form id="signup-form" novalidate>
+                <div class="form-group">
+                  <label for="signup-email" class="form-label">Email Address</label>
+                  <div class="input-addon-group">
+                    <span class="input-addon">✉</span>
+                    <input type="email" id="signup-email" class="form-control" placeholder="you@domain.com" required>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="signup-password" class="form-label">Choose Password</label>
+                  <input type="password" id="signup-password" class="form-control" placeholder="At least 6 characters" required>
+                </div>
+
+                <button type="submit" class="btn btn-coral" style="width: 100%; padding: 12px; margin-top: 1rem;">
+                  Create Instant Account
+                </button>
+              </form>
+            </div>
+
+          </div>
+
+          <!-- Redirection link to full registration -->
+          <div class="register-prompt-box">
+            <p>
+              Looking for full member registration with city and regional preferences?
+              <a href="#registration" class="register-cta-link" data-scene="registration">
+                REGISTER HERE (Full 10-Field Form) &rarr;
+              </a>
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 5: REGISTRATION (FULL 10-FIELD FORM)
+         ====================================================================== -->
+    <section id="scene-registration" class="scene-section" data-scene="registration">
+      <div class="container" style="padding-top: 2rem;">
+        
+        <div class="section-header">
+          <span class="section-badge">Member Registration</span>
+          <h2 class="section-title">Join The Chronicles Guild</h2>
+          <div class="calligraphy-banner">
+            <span class="calligraphy-text">New Member Registry</span>
+          </div>
+          <p class="section-subtitle">
+            Complete the full 10-field registration profile to unlock exclusive articles, blog contributions, and discussion forums.
+          </p>
+        </div>
+
+        <div class="registration-card-wrapper anime-card">
+          <div id="registration-alert" class="form-alert-banner"></div>
+
+          <form id="registration-form" novalidate>
+            <div class="reg-form-grid">
+              
+              <!-- 1. First Name -->
+              <div class="form-group">
+                <label for="reg-firstname" class="form-label">First Name *</label>
+                <input type="text" id="reg-firstname" class="form-control" placeholder="First name" required>
+                <span class="input-feedback error">Please provide your First name.</span>
+              </div>
+
+              <!-- 2. Last Name -->
+              <div class="form-group">
+                <label for="reg-lastname" class="form-label">Last Name *</label>
+                <input type="text" id="reg-lastname" class="form-control" placeholder="Last name" required>
+                <span class="input-feedback error">Please provide your Last name.</span>
+              </div>
+
+              <!-- 3. Username -->
+              <div class="form-group">
+                <label for="reg-username" class="form-label">Username *</label>
+                <div class="input-addon-group">
+                  <span class="input-addon">@</span>
+                  <input type="text" id="reg-username" class="form-control" placeholder="Choose a username" required>
+                </div>
+                <span class="input-feedback error">Please choose a valid username (min 3 chars).</span>
+              </div>
+
+              <!-- 4. Email -->
+              <div class="form-group">
+                <label for="reg-email" class="form-label">Email Address *</label>
+                <input type="email" id="reg-email" class="form-control" placeholder="name@example.com" required>
+                <span class="input-feedback error">Please provide a valid email.</span>
+              </div>
+
+              <!-- 5. Password -->
+              <div class="form-group">
+                <label for="reg-password" class="form-label">Password *</label>
+                <input type="password" id="reg-password" class="form-control" placeholder="Minimum 6 characters" required>
+                <span class="input-feedback error">Please enter a password (min 6 characters).</span>
+              </div>
+
+              <!-- 6. Confirm Password -->
+              <div class="form-group">
+                <label for="reg-confirmpassword" class="form-label">Confirm Password *</label>
+                <input type="password" id="reg-confirmpassword" class="form-control" placeholder="Re-enter password" required>
+                <span class="input-feedback error">Passwords do not match.</span>
+              </div>
+
+              <!-- 7. City -->
+              <div class="form-group">
+                <label for="reg-city" class="form-label">City *</label>
+                <input type="text" id="reg-city" class="form-control" placeholder="City" required>
+                <span class="input-feedback error">Please provide a valid city.</span>
+              </div>
+
+              <!-- 8. State Dropdown (Surat, Mumbai, Barodra) -->
+              <div class="form-group">
+                <label for="reg-state" class="form-label">State / Region *</label>
+                <select id="reg-state" class="form-select" required>
+                  <option value="" selected disabled>Choose...</option>
+                  <option value="Surat">Surat</option>
+                  <option value="Mumbai">Mumbai</option>
+                  <option value="Barodra">Barodra</option>
+                </select>
+                <span class="input-feedback error">Please select a valid state.</span>
+              </div>
+
+              <!-- 9. Pin Code -->
+              <div class="form-group">
+                <label for="reg-pincode" class="form-label">Pin Code / Postal *</label>
+                <input type="text" id="reg-pincode" class="form-control" placeholder="e.g. 395007" required>
+                <span class="input-feedback error">Please provide a valid 5 or 6 digit pin code.</span>
+              </div>
+
+              <!-- 10. Terms Checkbox -->
+              <div class="form-group full-span">
+                <div class="terms-checkbox-wrap">
+                  <input type="checkbox" id="reg-terms" required>
+                  <label for="reg-terms" class="terms-label">
+                    Agree to terms and conditions & our anime privacy charter *
+                  </label>
+                </div>
+                <span class="input-feedback error">You must agree before submitting.</span>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="form-group full-span" style="margin-top: 1rem;">
+                <button type="submit" id="reg-submit-btn" class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 1.05rem;">
+                  ✨ SUBMIT REGISTRATION
+                </button>
+              </div>
+
+            </div>
+          </form>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Global Footer with Social Links -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <h3 class="brand-title">Chronicles</h3>
+        <p>By Dibyaranjan &mdash; Where anime imagination meets genuine web craftsmanship.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.85rem; color: rgba(255, 255, 255, 0.75);">
+          Author Email: <strong>22amtics481@gmail.com</strong>
+        </p>
+      </div>
+
+      <div class="footer-links">
+        <h4>Navigation Scenes</h4>
+        <ul class="footer-nav-list">
+          <li><a href="#project" data-scene="project">Home & Narratives</a></li>
+          <li><a href="#about" data-scene="about">Our Story & Creator Bio</a></li>
+          <li><a href="#contact" data-scene="contact">Request A Call Back</a></li>
+          <li><a href="#login" data-scene="login">Reader Authentication</a></li>
+          <li><a href="#registration" data-scene="registration">New Member Registration</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-social">
+        <h4>Connect & Follow</h4>
+        <div class="social-buttons">
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-btn" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
+          <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="social-btn" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-btn" title="GitHub"><i class="fa-brands fa-github"></i></a>
+        </div>
+        <p style="margin-top: 1rem; font-size: 0.82rem; color: rgba(255, 255, 255, 0.8);">
+          Built strictly with HTML5, CSS3, and Vanilla JavaScript.
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; 2026 Chronicles By Dibyaranjan. All rights reserved.</span>
+      <span>Designed with pastel Ghibli tranquility.</span>
+    </div>
+  </footer>
+
+  <!-- Vendor Libraries: Standalone Minified with CDN Fallbacks -->
+  <script src="libs/gsap.min.js"></script>
+  <script src="libs/ScrollTrigger.min.js"></script>
+  <script src="libs/three.min.js"></script>
+  <script>
+    if (!window.gsap) document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"><\/script>');
+    if (!window.ScrollTrigger) document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"><\/script>');
+    if (!window.THREE) document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>');
+  </script>
+
+  <!-- Application Modules -->
+  <script src="js/transitions.js"></script>
+  <script src="js/parallax.js"></script>
+  <script src="js/three-scene.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
