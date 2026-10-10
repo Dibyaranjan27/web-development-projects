@@ -1,0 +1,165 @@
+/* ==========================================================================
+   Transitions Stylesheet - Cinematic Aperture & Speedline Shutter
+   4-Phase Film Cut Animation Overlay
+   ========================================================================== */
+
+/* Fullscreen Shutter Container */
+#cinematic-shutter {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  pointer-events: none;
+  visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#cinematic-shutter.animating {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Cinematic Letterbox Curtains */
+.shutter-curtain {
+  width: 100%;
+  height: 50.5vh;
+  background: linear-gradient(135deg, #0D1B2A 0%, #1B263B 50%, #053536 100%);
+  position: relative;
+  transition: transform 0.26s cubic-bezier(0.85, 0, 0.15, 1);
+  will-change: transform;
+}
+
+/* Top Curtain */
+.shutter-top {
+  transform: translateY(-100%);
+  border-bottom: 3px solid var(--color-seafoam);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* Bottom Curtain */
+.shutter-bottom {
+  transform: translateY(100%);
+  border-top: 3px solid var(--color-gold);
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* Phase 1 & 2: Curtains Closed */
+#cinematic-shutter.shutter-closed .shutter-top {
+  transform: translateY(0);
+}
+
+#cinematic-shutter.shutter-closed .shutter-bottom {
+  transform: translateY(0);
+}
+
+/* Center Anime Crest & Speedlines */
+.shutter-center-stage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.15s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+#cinematic-shutter.shutter-closed .shutter-center-stage {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Anime Speedline Rays */
+.speedlines-effect {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: repeating-radial-gradient(
+    circle at center,
+    transparent 0,
+    transparent 35px,
+    rgba(166, 227, 233, 0.08) 36px,
+    rgba(166, 227, 233, 0.08) 38px
+  );
+  opacity: 0;
+  animation: speedlinesPulse 0.2s linear infinite;
+}
+
+#cinematic-shutter.shutter-closed .speedlines-effect {
+  opacity: 1;
+}
+
+/* Kanji Emblem & Title */
+.crest-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: var(--radius-full);
+  border: 3px solid var(--color-gold);
+  background: radial-gradient(circle, var(--color-forest) 0%, #053536 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 30px rgba(253, 226, 167, 0.6), inset 0 0 15px rgba(113, 201, 206, 0.5);
+  margin-bottom: 0.75rem;
+  animation: crestRotate 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.crest-kanji {
+  font-family: var(--font-serif);
+  font-size: 2.4rem;
+  color: var(--color-gold);
+  text-shadow: 0 0 10px rgba(253, 226, 167, 0.8);
+}
+
+.crest-label {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--color-white);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* Animations */
+@keyframes speedlinesPulse {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.08); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes crestRotate {
+  0% { transform: scale(0.6) rotate(-25deg); opacity: 0; }
+  60% { transform: scale(1.1) rotate(5deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+/* Scene Exit Transition */
+.scene-section.scene-exiting {
+  opacity: 0 !important;
+  transform: scale(0.96) translateY(-10px) !important;
+  transition: opacity 0.24s cubic-bezier(0.85, 0, 0.15, 1), transform 0.24s cubic-bezier(0.85, 0, 0.15, 1) !important;
+}
+
+/* Scene Entrance Transition */
+.scene-section.scene-entering {
+  opacity: 0 !important;
+  transform: scale(1.03) translateY(20px) !important;
+}
+
+.scene-section.scene-entered {
+  opacity: 1 !important;
+  transform: scale(1) translateY(0) !important;
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}

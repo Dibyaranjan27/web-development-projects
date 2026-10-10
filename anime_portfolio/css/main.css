@@ -1,0 +1,459 @@
+/* ==========================================================================
+   Main Stylesheet - Anime Cinematic SPA
+   Ghibli Pastel Palette & Core Design System
+   ========================================================================== */
+
+:root {
+  /* Ghibli Pastel Anime Palette */
+  --color-sky: #D5E5DF;
+  --color-aqua: #A6E3E9;
+  --color-forest: #4E8777;
+  --color-seafoam: #71C9CE;
+  --color-teal: #11999E;
+  --color-teal-dark: #053536;
+  --color-coral: #F28482;
+  --color-gold: #FDE2A7;
+  --color-mint: #E8F8F5;
+  --color-sakura: #FFB7B2;
+  --color-white: #FFFFFF;
+  --color-ink: #1F2D3D;
+  --color-ink-muted: #4A5568;
+  --color-card-bg: rgba(255, 255, 255, 0.65);
+  --color-card-border: rgba(113, 201, 206, 0.35);
+
+  /* Typography */
+  --font-script: 'Sacramento', cursive, sans-serif;
+  --font-serif: 'Merriweather', serif;
+  --font-body: 'Trirong', Georgia, serif;
+  --font-ui: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  /* Shadows & Depth */
+  --shadow-sm: 0 4px 12px rgba(17, 153, 158, 0.08);
+  --shadow-md: 0 8px 24px rgba(78, 135, 119, 0.14);
+  --shadow-lg: 0 16px 40px rgba(5, 53, 54, 0.18);
+  --shadow-glow: 0 0 25px rgba(166, 227, 233, 0.6);
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* Layout */
+  --header-height: 84px;
+  --container-max: 1200px;
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  background-color: var(--color-sky);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(180deg, #D5E5DF 0%, #E8F8F5 45%, #D5E5DF 100%);
+}
+
+/* Background Ambient Three.js Canvas Container */
+
+
+#webgl-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Atmospheric Vignette Overlay */
+.vignette-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.15) 0%, rgba(213, 229, 223, 0.45) 85%);
+}
+
+/* Main Site Header & Nav */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 2px solid rgba(166, 227, 233, 0.6);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(1rem, 4vw, 3rem);
+  transition: all 0.3s ease;
+}
+
+/* Brand Logo */
+.brand-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--color-ink);
+}
+
+.brand-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-seafoam);
+  object-fit: cover;
+  background: var(--color-mint);
+  box-shadow: 0 2px 8px rgba(78, 135, 119, 0.2);
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-family: var(--font-serif); font-weight: 700; letter-spacing: 1px;
+  font-size: 2.2rem;
+  line-height: 1;
+  color: var(--color-forest);
+  letter-spacing: 1px;
+}
+
+.brand-subtitle {
+  font-family: var(--font-serif);
+  font-size: 0.72rem;
+  color: var(--color-ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Navigation Links */
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 1.5vw, 1.5rem);
+}
+
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-ink);
+  text-decoration: none;
+  border-radius: var(--radius-full);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link:hover {
+  color: var(--color-teal);
+  background: rgba(166, 227, 233, 0.25);
+  transform: translateY(-1px);
+}
+
+.nav-link.active {
+  color: var(--color-white);
+  background: linear-gradient(135deg, var(--color-forest), var(--color-teal));
+  box-shadow: 0 4px 12px rgba(17, 153, 158, 0.35);
+}
+
+.nav-icon {
+  font-size: 1.1rem;
+}
+
+/* Registration highlight CTA in nav */
+.nav-link.nav-register {
+  border: 1.5px solid var(--color-coral);
+  color: var(--color-coral);
+}
+
+.nav-link.nav-register:hover {
+  background: var(--color-coral);
+  color: var(--color-white);
+  box-shadow: 0 4px 12px rgba(242, 132, 130, 0.35);
+}
+
+.nav-link.nav-register.active {
+  background: var(--color-coral);
+  color: var(--color-white);
+}
+
+/* App Viewport */
+#app-viewport { background: transparent !important; 
+  position: relative;
+  z-index: 10;
+  margin-top: var(--header-height);
+  min-height: calc(100vh - var(--header-height));
+  width: 100%;
+}
+
+/* Global Content Containers */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Section Header Typography */
+.section-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+  position: relative;
+  gap: 0.5rem;
+}
+
+.section-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  font-family: var(--font-serif);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  color: var(--color-teal);
+  background: rgba(166, 227, 233, 0.35);
+  border-radius: var(--radius-full);
+  margin-bottom: 0.5rem;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  color: var(--color-forest);
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+}
+
+.section-subtitle {
+  font-size: 1.05rem;
+  color: var(--color-ink-muted);
+  max-width: 600px;
+  margin: 0.5rem auto 0;
+  line-height: 1.6;
+}
+
+/* Calligraphy Ribbon Banner */
+.calligraphy-banner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 36px;
+  background-image: url('../pic/bannerbg.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  margin: 0.5rem auto 1rem;
+}
+
+.calligraphy-text {
+  font-family: var(--font-serif); font-weight: 700; letter-spacing: 1px;
+  font-size: 1.6rem;
+  color: var(--color-forest);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* Site Footer */
+.site-footer {
+  position: relative;
+  z-index: 20;
+  background: linear-gradient(180deg, var(--color-seafoam) 0%, var(--color-teal) 100%);
+  color: var(--color-white);
+  padding: 3rem 1.5rem 2rem;
+  border-top: 3px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 -4px 20px rgba(17, 153, 158, 0.15);
+}
+
+.footer-content {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  align-items: start;
+}
+
+.footer-brand .brand-title {
+  color: var(--color-white);
+  font-size: 2.6rem;
+}
+
+.footer-brand p {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 0.5rem;
+}
+
+.footer-links h4,
+.footer-social h4 {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: var(--color-gold);
+  letter-spacing: 1px;
+}
+
+.footer-nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-nav-list a {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.footer-nav-list a:hover {
+  color: var(--color-gold);
+  padding-left: 4px;
+}
+
+/* Social Media Circular Buttons */
+.social-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 0.75rem;
+}
+
+.social-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+  text-decoration: none;
+  font-size: 1.25rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.social-btn:hover {
+  background: var(--color-coral);
+  color: var(--color-white);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 16px rgba(242, 132, 130, 0.4);
+}
+
+.footer-bottom {
+  max-width: var(--container-max);
+  margin: 2rem auto 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 22px;
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-forest), var(--color-teal));
+  color: var(--color-white);
+  box-shadow: 0 4px 14px rgba(17, 153, 158, 0.3);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--color-teal), var(--color-forest));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(17, 153, 158, 0.4);
+}
+
+.btn-coral {
+  background: linear-gradient(135deg, var(--color-coral), #E06C69);
+  color: var(--color-white);
+  box-shadow: 0 4px 14px rgba(242, 132, 130, 0.3);
+}
+
+.btn-coral:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(242, 132, 130, 0.45);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-forest);
+  border: 2px solid var(--color-forest);
+}
+
+.btn-outline:hover {
+  background: var(--color-forest);
+  color: var(--color-white);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  :root {
+    --header-height: 72px;
+  }
+  .brand-title {
+    font-size: 1.8rem;
+  }
+  .brand-subtitle {
+    display: none;
+  }
+  .site-nav {
+    gap: 4px;
+  }
+  .nav-link {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
+  .calligraphy-text {
+    font-size: 2.2rem;
+  }
+}

@@ -1,0 +1,263 @@
+/* ==========================================================================
+   2D Parallax Stylesheet - Multi-Layer Depth Engine
+   Hardware-accelerated CSS layers for atmospheric depth
+   ========================================================================== */
+
+.parallax-hero-wrapper {
+  position: relative;
+  width: 100%;
+  height: clamp(520px, 80vh, 760px);
+  overflow: hidden;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Layer Base Styling */
+.parallax-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Layer 0: Sky Backdrop / Distant Anime Horizon (Speed 0.1x) */
+.layer-sky {
+  z-index: 1;
+  
+  background-size: cover;
+  background-position: center bottom;
+  opacity: 0.35;
+  filter: saturate(1.2) contrast(0.95);
+}
+
+/* Layer 1: Far Clouds (Speed 0.3x) */
+.layer-cloud-far {
+  z-index: 2;
+  opacity: 0.55;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-top: 50px;
+}
+
+.cloud-item-far-1 {
+  width: 280px;
+  margin-left: -40px;
+  filter: blur(1.5px);
+  animation: cloudDriftSlow 38s linear infinite;
+}
+
+.cloud-item-far-2 {
+  width: 220px;
+  margin-right: 4%;
+  margin-top: 80px;
+  filter: blur(1px);
+  animation: cloudDriftSlow 44s linear infinite reverse;
+}
+
+/* Layer 2: Scenic Mountain Horizon Vignette & Calligraphy Banners (Speed 0.55x) */
+.layer-banner {
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.85;
+}
+
+.banner-silhouette {
+  max-width: 650px;
+  width: 60%;
+  position: absolute;
+  bottom: 40px;
+  filter: drop-shadow(0 10px 15px rgba(5, 53, 54, 0.15));
+}
+
+.banner-ribbon-left {
+  position: absolute;
+  top: 25%;
+  left: 3%;
+  width: 240px;
+  height: 60px;
+  background: url('../pic/bannerbg.png') no-repeat center;
+  background-size: contain;
+  opacity: 0.7;
+}
+
+.banner-ribbon-right {
+  position: absolute;
+  bottom: 22%;
+  right: 5%;
+  width: 280px;
+  height: 70px;
+  background: url('../pic/bannerbg.png') no-repeat center;
+  background-size: contain;
+  opacity: 0.65;
+}
+
+/* Layer 3: Foreground Clouds (Speed 0.8x) */
+.layer-cloud-near {
+  z-index: 4;
+  opacity: 0.9;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.cloud-item-near-1 {
+  width: clamp(240px, 30vw, 380px);
+  margin-left: 2%;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 6px 16px rgba(113, 201, 206, 0.3));
+  animation: cloudDriftNear 24s ease-in-out infinite alternate;
+}
+
+.cloud-item-near-2 {
+  width: clamp(200px, 26vw, 340px);
+  margin-right: -20px;
+  margin-bottom: 70px;
+  filter: drop-shadow(0 8px 20px rgba(17, 153, 158, 0.25));
+  animation: cloudDriftNear 28s ease-in-out infinite alternate-reverse;
+}
+
+/* Layer 4: Foreground Interactive Hero Content (Speed 1.0x) */
+.layer-content {
+  z-index: 5;
+  pointer-events: auto;
+  position: relative;
+  text-align: center;
+  padding: 0 1.5rem;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+/* Hero Title & Avatar */
+.hero-avatar-badge {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 1.2rem;
+  border-radius: var(--radius-full);
+  border: 4px solid var(--color-white);
+  box-shadow: 0 8px 25px rgba(17, 153, 158, 0.35);
+  overflow: hidden;
+  background: var(--color-mint);
+  position: relative;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-avatar-badge:hover {
+  transform: scale(1.08) rotate(3deg);
+}
+
+.hero-avatar-badge img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-main-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  color: var(--color-forest);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 0.8rem;
+  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.8);
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  color: var(--color-ink-muted);
+  font-family: var(--font-body);
+  max-width: 650px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Layer 5: Reverse Sakura Particle Flutter (Speed -0.4x) */
+.layer-petals {
+  z-index: 6;
+  opacity: 0.75;
+}
+
+.sakura-petal {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: linear-gradient(135deg, #FFB7B2 0%, #F28482 100%);
+  border-radius: 14px 2px 14px 2px;
+  opacity: 0.85;
+  filter: drop-shadow(0 2px 4px rgba(242, 132, 130, 0.4));
+  animation: petalFall 12s linear infinite;
+}
+
+.sakura-petal:nth-child(1) { left: 10%; top: -20px; animation-duration: 11s; animation-delay: 0s; transform: scale(0.9); }
+.sakura-petal:nth-child(2) { left: 25%; top: -20px; animation-duration: 14s; animation-delay: 2s; transform: scale(1.2); }
+.sakura-petal:nth-child(3) { left: 45%; top: -20px; animation-duration: 9s; animation-delay: 4s; transform: scale(0.8); }
+.sakura-petal:nth-child(4) { left: 65%; top: -20px; animation-duration: 13s; animation-delay: 1s; transform: scale(1.1); }
+.sakura-petal:nth-child(5) { left: 80%; top: -20px; animation-duration: 15s; animation-delay: 3s; transform: scale(1.0); }
+.sakura-petal:nth-child(6) { left: 92%; top: -20px; animation-duration: 10s; animation-delay: 5s; transform: scale(0.85); }
+
+/* Drifting Keyframe Animations */
+@keyframes cloudDriftSlow {
+  0% { transform: translate3d(-30px, 0, 0); }
+  50% { transform: translate3d(30px, -8px, 0); }
+  100% { transform: translate3d(-30px, 0, 0); }
+}
+
+@keyframes cloudDriftNear {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(40px, -15px, 0); }
+}
+
+@keyframes petalFall {
+  0% {
+    transform: translate3d(0, -20px, 0) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.9;
+  }
+  85% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate3d(120px, 750px, 0) rotate(420deg);
+    opacity: 0;
+  }
+}
+
+.hero-silhouette {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1400px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.parallax-solid-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../pic/vector_landscape.jpg') center/cover no-repeat;
+  z-index: -2;
+}
