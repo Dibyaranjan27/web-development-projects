@@ -1,11 +1,7 @@
-<div align="center">
-  <img src="pic/vector_landscape.jpg" alt="Anime Portfolio Banner" width="100%" style="border-radius: 12px; margin-bottom: 20px; max-height: 320px; object-fit: cover;" />
-</div>
-
 <h1 align="center">✨ Chronicles - Anime Cinematic Portfolio 🌸</h1>
 
 <p align="center">
-  An anime-inspired cinematic portfolio and landing page featuring 2D parallax scrolling, Three.js 3D WebGL scenes, and smooth scene transitions without page reloads.
+  An anime-inspired cinematic portfolio and landing page featuring 2D parallax scrolling, Three.js 3D WebGL scenes, and smooth scene transitions.
 </p>
 
 <div align="center">
@@ -19,26 +15,60 @@
 
 ## 📖 Table of Contents
 - [The Story Behind This Project](#-the-story-behind-this-project)
+- [Screenshots](#-screenshots)
 - [Key Features](#-key-features)
 - [Tech Stack](#-tech-stack)
 - [Installation and Usage](#-installation-and-usage)
 - [File Structure](#-file-structure)
+- [Contribution](#-contribution)
 - [License](#-license)
 - [Author](#-author)
 
 ---
 
-## 💡 The Story Behind This Project
+## 📜 The Story Behind This Project
 
-This project aims to combine traditional anime-inspired visual aesthetics (think Studio Ghibli or Makoto Shinkai style backgrounds) with modern frontend web engineering. By leveraging Vanilla HTML, CSS, and JavaScript, the project avoids heavy frontend frameworks while delivering a high-performance Single Page Application (SPA).
+This project aims to combine traditional anime-inspired visual aesthetics (think Studio Ghibli or Makoto Shinkai style backgrounds) with modern frontend web engineering. I could have just thrown together a simple template and called it a day, but I genuinely wanted to create something that looked like a real, premium platform.
 
-I wanted to include cinematic transitions that mimic movie scene cuts, a multi-layer 2D parallax system for atmospheric depth, and an interactive 3D WebGL background using Three.js. After several iterations—and a lot of debugging with overlapping layers—it finally culminated into this highly polished, responsive landing page. 
+I recently went back to it and completely polished it up. I restructured the layouts, added custom vector illustrations, fixed a bunch of responsive mobile issues, and implemented a sleek, consistent ambient WebGL background. It's really cool seeing how a simple assignment can transform into a professional-looking frontend with just some careful styling and attention to detail.
+
+If you like how it turned out, feel free to drop a **star ⭐** or **fork it 🍴**!
+
+I really like what I made and wanted to share it with you all. I am also very open to suggestions, so if you have any feedback or ideas, please let me know!
 
 ---
 
-## 🚀 Key Features
+## 🖥️ Screenshots
 
-- **Single Page Application (SPA):** Seamless navigation between sections (Home, About, Contact, Login, Register) without triggering a browser window reload, driven purely by the History API.
+<div align="center">
+  <table>
+    <tr>
+      <td rowspan="2" align="center" valign="middle">
+        <img src="pic/vector_landscape.jpg" alt="Homepage" width="400">
+        <br/>
+        <em>Homepage & Vector Hero Section</em>
+      </td>
+      <td align="center">
+        <img src="pic/about_illustration.jpg" alt="About Page" width="400">
+        <br/>
+        <em>About Page Vector Art</em>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img src="pic/login.jpg" alt="Login Area" width="400">
+        <br/>
+        <em>Cinematic Authentication Section</em>
+      </td>
+    </tr>
+  </table>
+</div>
+
+---
+
+## 📌 Key Features
+
+- **Single Page Application (SPA):** Seamless navigation between sections without triggering a browser window reload.
 - **2D Parallax Engine:** A dual-engine parallax implementation (GSAP ScrollTrigger + Vanilla JS RAF Fallback) providing distinct movement depth to sky, clouds, and ribbons.
 - **Cinematic Scene Transitions:** A custom 4-phase shutter transition utilizing CSS keyframes, featuring anime speedline rays and kanji crests before revealing the destination page.
 - **Three.js WebGL Centerpiece:** A fully integrated 3D Canvas rendering a massive, real-time glowing Torus Knot / Atom with pink and cyan emissive materials in the background.
@@ -46,7 +76,7 @@ I wanted to include cinematic transitions that mimic movie scene cuts, a multi-l
 
 ---
 
-## 🛠 Tech Stack
+## 🛠️ Tech Stack
 
 - **Markup & Styling:** HTML5, CSS3, CSS Variables, Keyframe Animations
 - **Logic & Routing:** Vanilla JavaScript (ES5/ES6)
@@ -56,7 +86,7 @@ I wanted to include cinematic transitions that mimic movie scene cuts, a multi-l
 
 ---
 
-## ⚙️ Installation and Usage
+## 🚀 Installation and Usage
 
 1. Clone or download the repository.
 2. Navigate to the `anime_portfolio` folder.
@@ -88,12 +118,25 @@ anime_portfolio/
 
 ---
 
+## 🤝 Contribution
+
+Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
+
+---
+
 ## 📜 License
 
 This project is open-source and available under the MIT License.
 
 ---
 
-## 🙋‍♂️ Author
+## 💡 Author
 
-Crafted with passion by **Dibyaranjan**.
+<p align="center">
+<em>Crafted with pixels & passion by</em>
+<br>
+<strong>Dibyaranjan Maharana</strong>
+<br>
+<a href="https://github.com/Dibyaranjan27">GitHub</a> | <a href="https://www.linkedin.com/in/dibyaranjan-maharana-1228012b2/">LinkedIn</a>
+</p>
+
