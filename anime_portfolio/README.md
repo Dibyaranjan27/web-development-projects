@@ -41,27 +41,13 @@ I really like what I made and wanted to share it with you all. I am also very op
 ## 🖥️ Screenshots
 
 <div align="center">
-  <table>
-    <tr>
-      <td rowspan="2" align="center" valign="middle">
-        <img src="pic/vector_landscape.jpg" alt="Homepage" width="400">
-        <br/>
-        <em>Homepage & Vector Hero Section</em>
-      </td>
-      <td align="center">
-        <img src="pic/about_illustration.jpg" alt="About Page" width="400">
-        <br/>
-        <em>About Page Vector Art</em>
-      </td>
-    </tr>
-    <tr>
-      <td align="center">
-        <img src="pic/login.jpg" alt="Login Area" width="400">
-        <br/>
-        <em>Cinematic Authentication Section</em>
-      </td>
-    </tr>
-  </table>
+  <a href="pic/screenshot-1.png"><img src="pic/screenshot-1.png" alt="Homepage Hero Section" width="48%" style="max-width: 100%; height: auto; margin-bottom: 10px;"></a>
+  <a href="pic/screenshot-2.png"><img src="pic/screenshot-2.png" alt="About Section" width="48%" style="max-width: 100%; height: auto; margin-bottom: 10px;"></a>
+  <br/>
+  <a href="pic/screenshot-3.png"><img src="pic/screenshot-3.png" alt="Contact Section" width="48%" style="max-width: 100%; height: auto; margin-bottom: 10px;"></a>
+  <a href="pic/screenshot-4.png"><img src="pic/screenshot-4.png" alt="Login Section" width="48%" style="max-width: 100%; height: auto; margin-bottom: 10px;"></a>
+  <br/>
+  <a href="pic/screenshot-5.png"><img src="pic/screenshot-5.png" alt="Register Section" width="97%" style="max-width: 100%; height: auto; margin-bottom: 10px;"></a>
 </div>
 
 ---
